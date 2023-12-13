@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>니자리여기어때_정신개조</title>
+    <link rel="stylesheet" href="fullPage.js-2.9.7/dist/jquery.fullpage.min.css"/>
+    <link href="index.css" rel="stylesheet"/>
+    <style>
+        .fp-tableCell{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="./images/로고_흰색글씨.png" alt="로고">
+            <ul>
+                <li><a href="#login">로그인</a></li>
+                <li><a href="#management">물류관리</a></li>
+                <li><a href="#status">분류현황</a></li>
+                <li><a href="#cusSupport">고객지원</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="fullpage">
+        <!-- 시작 페이지 -->
+        <div class="section" id="start-main-page">
+            <p class="container">
+                스마트 물류 시스템</br>
+                Mental Reform
+            </p>
+            <div class="video-container">
+                <video data-autoplay muted loop>
+                    <source src="./images/메인2.mp4" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+        </div>
+
+        <!-- 프로젝트소개 1 -->
+        <div class="section" id="project-Intro-1">
+            <div class="scrollbar-top-left"></div>
+            <div class="scrollbar-bottom-right"></div>
+            <img id="Nijariyeogidae" src="./images/니자리여기어때.png" alt="니자리여기어때">
+        </div>
+
+        <!-- 프로젝트소개 2 -->
+        <div class="section" id="project-Intro-2">
+            프로젝트소개2
+        </div>
+
+        <!-- 프로젝트소개 3 -->
+        <div class="section" id="project-Intro-3">
+            프로젝트소개3
+        </div>
+
+        <!-- 팀원소개 -->
+        <div class="section" id="team-Intro">
+            <div class="video-container">
+                <video data-autoplay muted loop>
+                    <source src="./images/메인3.mp4" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+            <h1 id="team-Intro-title">정신개조</br>Mental Reform</h1>
+            <div class="member">
+                <img id="yongwoo" src="./images/진용우소개임시.png" alt="진용우소개사진">
+                <div class="member-description" id="yong">
+                    <h3>진용우</h3>
+                    <p>팀원</p>
+                    <p>"코드는 내 언어, 알고리즘이 나의 노래! 프로그래밍의 세계에서 자유로운 개발자! 디지털 세계의 작가. 본좌는 개발자의 왕 진용우입니다.✨💻✍"</p>
+                    <p>Email : dsjin99@gmail.com</p>
+                </div>
+            </div>
+            <div class="member">
+                <img id="junhyoung" src="./images/최준형소개임시.png" alt="최준형소개사진">
+                <div class="member-description" id="jun">
+                    <h3>최준형</h3>
+                    <p>팀원</p>
+                    <p>왕귀형 개발자 최준형입니다. (스텍쌓아서 캐리하겠습니다.)</p>
+                    <p>Email : wnsgud0812@naver.com</p>
+                </div>
+            </div>
+            <div class="member">
+                <img id="jisu" src="./images/황지수소개.jpg" alt="황지수소개사진">
+                <div class="member-description" id="ji">
+                    <h3>황지수</h3>
+                    <p>팀장</p>
+                    <p>자신감과 열정으로 기술의 가능성을 끌어올리는 개발자 황지수입니다.</p>
+                    <p>Email : jeesu0320@naver.com</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 마지막 페이지 -->
+        <div class="section" id="last-main-page">
+            <p>니자리 여기어때</br>정신개조 프로젝트</p>
+            <img id="logo" src="./images/로고_검정글씨.png" alt="로고">
+            <a href="https://github.com/JITUCHU/2023AIoT-FINAL-Project">
+                <img id="github-logo" src="./images/github-logo.png" alt="깃허브로고">
+            </a>
+            <a href="https://www.notion.so/6855e9fd82ff4220b69e527a998cf981?pvs=4">
+                <img id="notion-jisu" src="./images/notion-logo.png" alt="지수노션">
+            </a>
+            <a href="https://www.notion.so/6855e9fd82ff4220b69e527a998cf981?pvs=4">
+                <img id="notion-junhyoung" src="./images/notion-logo.png" alt="준형노션">
+            </a>
+            <a href="https://www.notion.so/6855e9fd82ff4220b69e527a998cf981?pvs=4">
+                <img id="notion-yongwoo" src="./images/notion-logo.png" alt="용우노션">
+            </a>
+            <a class="question-programer" href="#cusSupport">개발자에게 문의하기</a>
+            <footer>
+                <div>
+                    </br>
+                    &copy; 정신개조 2023 AIoT 최종 프로젝트
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="jquery-3.7.1.js"></script>
+    <script src="fullPage.js-2.9.7/dist/jquery.fullpage.min.js"></script>
+    <script src="fullPage.js-2.9.7/dist/jquery.fullpage.extensions.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#fullpage').fullpage({
+            });
+        });
+    </script>
+    <script>
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+
+            // 스크롤 위치에 따라 나타나는 영역을 설정 (예시: 40% 위치)
+            const threshold = documentHeight * 0.4;
+
+            // 좌측 상단 막대 애니메이션 효과
+            const topBar = document.querySelector('.scrollbar-top-left');
+            if (scrollTop > threshold) {
+                topBar.style.opacity = 1;
+            } else {
+                topBar.style.opacity = 0;
+            }
+
+            // 우측 하단 막대 애니메이션 효과
+            const bottomBar = document.querySelector('.scrollbar-bottom-right');
+            if (scrollTop + windowHeight < documentHeight - threshold) {
+                bottomBar.style.opacity = 1;
+            } else {
+                bottomBar.style.opacity = 0;
+            }
+        });
+    </script>
+</body>
+</html>

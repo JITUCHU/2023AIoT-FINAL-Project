@@ -1,0 +1,271 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "JalnanGothic";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+/* 메인페이지 전체 배경색 지정 */
+body {
+  background: #25303C;
+  background: -moz-linear-gradient(top, #25303C 0%, #728EAA 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #25303C), color-stop(100%, #728EAA));
+}
+
+/* navbar 설정 */
+nav {
+  display: flex;
+  align-items: center;
+  font-family: "JalnanGothic";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+nav img {
+  margin-left: 20px;
+  margin-right: auto;
+  width: 40px;
+  height: 40px;
+  max-width: 100px;
+  vertical-align: middle;
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+nav li {
+  margin-right: 23px;
+}
+nav a {
+  text-decoration: none;
+  font-size: 16px;
+  color: lightgray;
+}
+nav a:hover {
+  text-decoration: underline;
+  color: white;
+  font-size: 17px; /* 커서 올라왔을 때 크기 약간 키우기 */
+  transition: transform 0.1s ease-in-out; /* 변경된 스타일 적용까지 걸리는 시간 */
+}
+
+/* 시작 페이지 설정 */
+#start-main-page {
+  font-family: "JalnanGothic";
+  color: white;
+  text-align: center;
+  position: relative;
+}
+#start-main-page .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  width: 100%;
+  position: absolute;
+  top: 40%;
+  z-index: 9999;
+}
+#start-main-page .video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#start-main-page .video-container video {
+  object-fit: cover;
+}
+
+/* 프로젝트 소개 페이지1 설정 */
+#project-Intro-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "JalnanGothic";
+  position: relative;
+  height: 100vh;
+}
+#project-Intro-1 #Nijariyeogidae {
+  width: 1000px;
+  height: auto;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#project-Intro-1 .scrollbar-top-left, #project-Intro-1 .scrollbar-bottom-right {
+  position: fixed;
+  width: 20px;
+  height: 0;
+  background-color: #738ff5;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+#project-Intro-1 .scrollbar-top-left.active, #project-Intro-1 .scrollbar-bottom-right.active {
+  height: 100vh;
+  opacity: 1;
+}
+#project-Intro-1 .scrollbar-top-left {
+  top: 0;
+  left: 0;
+}
+#project-Intro-1 .scrollbar-bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+/* 프로젝트 소개 페이지1 설정 */
+/* 프로젝트 소개 페이지1 설정 */
+/* 팀원 소개 페이지 설정 */
+#team-Intro {
+  color: white;
+  position: relative;
+  height: 100vh;
+  font-family: "JalnanGothic";
+  /* 배경 */
+}
+#team-Intro .video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#team-Intro .video-container video {
+  object-fit: cover;
+}
+#team-Intro #team-Intro-title {
+  position: absolute;
+  top: 140px;
+  left: 200px;
+}
+#team-Intro .member-description {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 10px;
+  transition: opacity 0.2s ease-in-out;
+}
+#team-Intro img {
+  width: 200px;
+  height: 200px;
+  border-radius: 70%;
+  overflow: hidden;
+  position: absolute;
+  transition: transform 0.2s ease-in-out;
+}
+#team-Intro img:hover {
+  transform: scale(1.2);
+}
+#team-Intro img:hover + .member-description {
+  display: block;
+}
+#team-Intro #yongwoo {
+  top: 280px;
+  left: 200px;
+}
+#team-Intro #junhyoung {
+  top: 446px;
+  right: 200px;
+}
+#team-Intro #jisu {
+  bottom: 120px;
+  left: 200px;
+}
+#team-Intro #yong {
+  top: 280px;
+  left: 450px;
+}
+#team-Intro #jun {
+  top: 446px;
+  right: 450px;
+}
+#team-Intro #ji {
+  bottom: 135px;
+  left: 450px;
+}
+
+/* 마지막 페이지 설정 */
+#last-main-page {
+  display: flex;
+  justify-content: center;
+  font-family: "yg-jalnan";
+  background: lightgray;
+  position: relative;
+}
+#last-main-page #logo {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 30%;
+  right: 25%;
+}
+#last-main-page #github-logo {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 40%;
+  left: 20%;
+}
+#last-main-page #notion-jisu {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 47%;
+  left: 20%;
+}
+#last-main-page #notion-junhyoung {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 47%;
+  left: 23%;
+}
+#last-main-page #notion-yongwoo {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 47%;
+  left: 26%;
+}
+#last-main-page p {
+  text-decoration: underline;
+  font-size: 35px;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+}
+#last-main-page .question-programer {
+  font-size: 15px;
+  position: absolute;
+  bottom: 20%;
+  left: 20%;
+  z-index: 222;
+}
+#last-main-page footer {
+  border-top: 1px solid #8f8f8f;
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=index.css.map */
