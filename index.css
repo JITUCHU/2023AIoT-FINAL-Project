@@ -11,6 +11,12 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "JeonjuCraftGoR";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/JeonjuCraftGoR.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
 /* 메인페이지 전체 배경색 지정 */
 body {
   background: #25303C;
@@ -90,47 +96,160 @@ nav a:hover {
   object-fit: cover;
 }
 
+@media (max-width: 1200px) {
+  #start-main-page .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    width: 100%;
+    position: absolute;
+    top: 40%;
+    z-index: 9999;
+  }
+}
+@media (max-width: 700px) {
+  #start-main-page .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    width: 100%;
+    position: absolute;
+    top: 40%;
+    z-index: 9999;
+  }
+}
 /* 프로젝트 소개 페이지1 설정 */
 #project-Intro-1 {
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "JalnanGothic";
   position: relative;
+  font-family: "JalnanGothic";
   height: 100vh;
+  overflow: hidden;
+}
+#project-Intro-1 .project-Intro-1 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #project-Intro-1 #Nijariyeogidae {
   width: 1000px;
-  height: auto;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
 }
-#project-Intro-1 .scrollbar-top-left, #project-Intro-1 .scrollbar-bottom-right {
-  position: fixed;
-  width: 20px;
-  height: 0;
-  background-color: #738ff5;
-  z-index: 9999;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+#project-Intro-1 h2 {
+  font-family: "JeonjuCraftGoR";
+  text-align: center;
 }
-#project-Intro-1 .scrollbar-top-left.active, #project-Intro-1 .scrollbar-bottom-right.active {
-  height: 100vh;
-  opacity: 1;
-}
-#project-Intro-1 .scrollbar-top-left {
-  top: 0;
-  left: 0;
-}
-#project-Intro-1 .scrollbar-bottom-right {
-  bottom: 0;
-  right: 0;
+#project-Intro-1 h3 {
+  font-family: "JeonjuCraftGoR";
+  text-align: center;
 }
 
-/* 프로젝트 소개 페이지1 설정 */
-/* 프로젝트 소개 페이지1 설정 */
+.active .deco1 {
+  width: 0px;
+  height: 20px;
+  background-color: #007ac3;
+  position: absolute;
+  top: 0;
+  left: 380px; /* 시작 위치 (500, 0) */
+  transform-origin: left top;
+  transform: rotate(-225deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
+  animation: drawLine 2s forwards;
+}
+.active .deco2 {
+  width: -200px;
+  height: 15px;
+  background-color: #c4cbcf;
+  position: absolute;
+  top: 300px;
+  left: -20px; /* 시작 위치 (0, 300) */
+  transform-origin: left top;
+  transform: rotate(-45deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
+  animation: drawLine 2s forwards;
+}
+.active .deco3 {
+  width: 0px;
+  height: 15px;
+  background-color: #d1e5f0;
+  position: absolute;
+  top: 460px;
+  left: -20px; /* 시작 위치 (0, 460) */
+  transform-origin: left top;
+  transform: rotate(-45deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
+  animation: drawLine 2s forwards;
+}
+.active .deco4 {
+  width: 0px;
+  height: 20px;
+  background-color: #022e48;
+  position: absolute;
+  bottom: -30px;
+  right: -70px;
+  transform-origin: left top;
+  transform: rotate(-45deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
+  animation: drawLine 2s forwards;
+}
+.active .deco5 {
+  width: -200px;
+  height: 15px;
+  background-color: #a2a4a5;
+  position: absolute;
+  bottom: 300px;
+  right: -330px;
+  transform-origin: left top;
+  transform: rotate(-225deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
+  animation: drawLine 2s forwards;
+}
+.active .deco6 {
+  width: 0px;
+  height: 15px;
+  background-color: #a7d8f3;
+  position: absolute;
+  bottom: 470px;
+  right: -520px; /* 시작 위치 (0, 400) */
+  transform-origin: left top;
+  transform: rotate(-225deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
+  animation: drawLine 2s forwards;
+}
+
+@keyframes drawLine {
+  100% {
+    width: 500px;
+  }
+}
+@media (max-width: 1200px) {
+  #project-Intro-1 #Nijariyeogidae {
+    width: 800px;
+  }
+  #project-Intro-1 h2 {
+    text-align: center;
+  }
+  #project-Intro-1 h3 {
+    font-size: 15px;
+  }
+}
+@media (max-width: 800px) {
+  #project-Intro-1 #Nijariyeogidae {
+    width: 400px;
+  }
+  #project-Intro-1 h2 {
+    text-align: center;
+  }
+  #project-Intro-1 h3 {
+    font-size: 15px;
+  }
+}
+/* 프로젝트 소개 페이지2 설정 */
+/* 프로젝트 소개 페이지2 설정 */
 /* 팀원 소개 페이지 설정 */
 #team-Intro {
   color: white;
@@ -200,6 +319,126 @@ nav a:hover {
   left: 450px;
 }
 
+@media (max-width: 1300px) {
+  #team-Intro #team-Intro-title {
+    position: absolute;
+    top: 140px;
+    left: 200px;
+  }
+  #team-Intro .member-description {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 10px;
+    transition: opacity 0.2s ease-in-out;
+  }
+  #team-Intro img {
+    width: 180px;
+    height: 180px;
+    border-radius: 70%;
+    overflow: hidden;
+    position: absolute;
+    transition: transform 0.2s ease-in-out;
+  }
+  #team-Intro img:hover {
+    transform: scale(1.2);
+  }
+  #team-Intro img:hover + .member-description {
+    display: block;
+  }
+  #team-Intro #yongwoo {
+    top: 280px;
+    left: 200px;
+  }
+  #team-Intro #junhyoung {
+    top: 446px;
+    right: 200px;
+  }
+  #team-Intro #jisu {
+    bottom: 120px;
+    left: 200px;
+  }
+  #team-Intro #yong {
+    top: 280px;
+    left: 430px;
+  }
+  #team-Intro #jun {
+    top: 446px;
+    right: 430px;
+  }
+  #team-Intro #ji {
+    bottom: 120px;
+    left: 430px;
+  }
+  #team-Intro h3 {
+    font-size: 18px;
+  }
+  #team-Intro p {
+    font-size: 15px;
+  }
+}
+@media (max-width: 1000px) {
+  #team-Intro #team-Intro-title {
+    position: absolute;
+    top: 120px;
+    left: 150px;
+  }
+  #team-Intro .member-description {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 10px;
+    transition: opacity 0.2s ease-in-out;
+  }
+  #team-Intro img {
+    width: 160px;
+    height: 160px;
+    border-radius: 70%;
+    overflow: hidden;
+    position: absolute;
+    transition: transform 0.2s ease-in-out;
+  }
+  #team-Intro img:hover {
+    transform: scale(1.2);
+  }
+  #team-Intro img:hover + .member-description {
+    display: block;
+  }
+  #team-Intro #yongwoo {
+    top: 260px;
+    left: 170px;
+  }
+  #team-Intro #junhyoung {
+    top: 460px;
+    left: 170px;
+  }
+  #team-Intro #jisu {
+    top: 660px;
+    left: 170px;
+  }
+  #team-Intro #yong {
+    top: 260px;
+    left: 380px;
+  }
+  #team-Intro #jun {
+    top: 450px;
+    left: 380px;
+    right: 100px;
+  }
+  #team-Intro #ji {
+    top: 660px;
+    left: 380px;
+    bottom: 85px;
+  }
+  #team-Intro h3 {
+    font-size: 18px;
+  }
+  #team-Intro p {
+    font-size: 15px;
+  }
+}
 /* 마지막 페이지 설정 */
 #last-main-page {
   display: flex;
@@ -266,6 +505,95 @@ nav a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 1350px) {
+  #last-main-page #logo {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    top: 30%;
+    right: 20%;
+  }
+  #last-main-page #github-logo {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 35%;
+    left: 20%;
+  }
+  #last-main-page #notion-jisu {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 42%;
+    left: 20%;
+  }
+  #last-main-page #notion-junhyoung {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 42%;
+    left: 26%;
+  }
+  #last-main-page #notion-yongwoo {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 42%;
+    left: 32%;
+  }
+  #last-main-page p {
+    text-decoration: underline;
+    font-size: 30px;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+  }
+}
+@media (max-width: 950px) {
+  #last-main-page #logo {
+    position: absolute;
+    top: 65%;
+    left: 18%;
+    width: 100px;
+    height: 100px;
+  }
+  #last-main-page #github-logo {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 35%;
+    left: 20%;
+  }
+  #last-main-page #notion-jisu {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 42%;
+    left: 20%;
+  }
+  #last-main-page #notion-junhyoung {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 42%;
+    left: 28%;
+  }
+  #last-main-page #notion-yongwoo {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 42%;
+    left: 36%;
+  }
+  #last-main-page p {
+    text-decoration: underline;
+    font-size: 30px;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */

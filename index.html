@@ -17,10 +17,10 @@
         <nav>
             <img src="./images/로고_흰색글씨.png" alt="로고">
             <ul>
-                <li><a href="#login">로그인</a></li>
+                <li><a href="login.ejs">로그인</a></li>
                 <li><a href="#management">물류관리</a></li>
                 <li><a href="#status">분류현황</a></li>
-                <li><a href="#cusSupport">고객지원</a></li>
+                <li><a href="question.ejs">고객지원</a></li>
             </ul>
         </nav>
     </header>
@@ -42,9 +42,25 @@
 
         <!-- 프로젝트소개 1 -->
         <div class="section" id="project-Intro-1">
-            <div class="scrollbar-top-left"></div>
-            <div class="scrollbar-bottom-right"></div>
-            <img id="Nijariyeogidae" src="./images/니자리여기어때.png" alt="니자리여기어때">
+            <div class="project-Intro-1">
+                <div class="deco1"></div>
+                <div class="deco2"></div>
+                <div class="deco3"></div>
+                <div class="deco4"></div>
+                <div class="deco5"></div>
+                <div class="deco6"></div>
+                <div class="project-Intro-1-content">
+                    <img id="Nijariyeogidae" src="./images/니자리여기어때.png" alt="니자리여기어때">
+                    <h2>
+                        스마트 물류 시스템인 "니자리 여기어때"는</br>
+                        정신개조에 의해 개발된 자동 물류 분류 시스템으로,
+                    </h2>
+                    <h3>
+                        각종 센서를 아두이노로 제어하고 바코드를 OpenCV 영상처리를 통해 분석하여</br>
+                        물류의 분류 및 데이터 관리를 할 수 있는 시스템입니다.
+                    </h3>
+                </div>
+            </div>
         </div>
 
         <!-- 프로젝트소개 2 -->
@@ -80,7 +96,7 @@
                 <div class="member-description" id="jun">
                     <h3>최준형</h3>
                     <p>팀원</p>
-                    <p>왕귀형 개발자 최준형입니다. (스텍쌓아서 캐리하겠습니다.)</p>
+                    <p>도전을 즐기고 실패를 두려워하지 않는 개발자 최준형입니다.</p>
                     <p>Email : wnsgud0812@naver.com</p>
                 </div>
             </div>
@@ -111,7 +127,7 @@
             <a href="https://www.notion.so/6855e9fd82ff4220b69e527a998cf981?pvs=4">
                 <img id="notion-yongwoo" src="./images/notion-logo.png" alt="용우노션">
             </a>
-            <a class="question-programer" href="#cusSupport">개발자에게 문의하기</a>
+            <a class="question-programer" href="question.ejs">개발자에게 문의하기</a>
             <footer>
                 <div>
                     </br>
@@ -128,32 +144,6 @@
         $(document).ready(function() {
             $('#fullpage').fullpage({
             });
-        });
-    </script>
-    <script>
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-
-            // 스크롤 위치에 따라 나타나는 영역을 설정 (예시: 40% 위치)
-            const threshold = documentHeight * 0.4;
-
-            // 좌측 상단 막대 애니메이션 효과
-            const topBar = document.querySelector('.scrollbar-top-left');
-            if (scrollTop > threshold) {
-                topBar.style.opacity = 1;
-            } else {
-                topBar.style.opacity = 0;
-            }
-
-            // 우측 하단 막대 애니메이션 효과
-            const bottomBar = document.querySelector('.scrollbar-bottom-right');
-            if (scrollTop + windowHeight < documentHeight - threshold) {
-                bottomBar.style.opacity = 1;
-            } else {
-                bottomBar.style.opacity = 0;
-            }
         });
     </script>
 </body>
