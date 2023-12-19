@@ -1,16 +1,16 @@
 const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser');
-const {transporter,mailOptions} =require('./email_auth.js')
-const db = require('./db');
-const nodemailer = require('nodemailer')
-const crypto = require('crypto')
+// const {transporter,mailOptions} =require('./email_auth.js')
+// const db = require('./db');
+// const nodemailer = require('nodemailer')
+// const crypto = require('crypto')
 
-const router = express.Router();
+// const router = express.Router();
 
 const authRouter = require('./auth');
 const authCheck = require('./authCheck.js');
-const template = require('./template.js');
+// const template = require('./template.js');
 
 const app = express()
 const port = 3000
@@ -19,8 +19,7 @@ app.set('view engine','ejs')
 app.set('views','./public')
 
 app.use(
-  express.static(__dirname + "/public"
-)
+  express.static(__dirname + "/public")
 )
 
 app.use(bodyParser.urlencoded({ extended: false }));

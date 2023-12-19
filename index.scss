@@ -149,7 +149,7 @@ nav{
     height: 100vh;
     overflow: hidden;
 
-    .project-Intro-1{
+    .project-Introduce-1{
         width: 100%;
         height: 100%;
 
@@ -182,24 +182,26 @@ nav{
     .deco1 {
         width: 0px;
         height: 20px;
-        background-color: #007ac3;
+        background-color: #007cc3;
         position: absolute;
         top: 0;
         left: 380px; /* 시작 위치 (500, 0) */
         transform-origin: left top;
         transform: rotate(-225deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
         animation: drawLine 2s forwards;
+        z-index: -10;
     }
     .deco2 {
-        width: -200px;
+        width: 0px;
         height: 15px;
         background-color: #c4cbcf;
         position: absolute;
-        top: 300px;
-        left: -20px; /* 시작 위치 (0, 300) */
+        top: 415px;
+        left: -130px; /* 시작 위치 (0, 300) */
         transform-origin: left top;
         transform: rotate(-45deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
         animation: drawLine 2s forwards;
+        z-index: -10;
     }
     .deco3 {
         width: 0px;
@@ -211,39 +213,91 @@ nav{
         transform-origin: left top;
         transform: rotate(-45deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
         animation: drawLine 2s forwards;
+        z-index: -10;
     }
     .deco4 {
         width: 0px;
         height: 20px;
         background-color: #022e48;
         position: absolute;
-        bottom: -30px;
-        right: -70px;
+        bottom: -100px;
+        right: -100px;
         transform-origin: left top;
         transform: rotate(-45deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
         animation: drawLine 2s forwards;
+        z-index: -10;
     }
     .deco5 {
-        width: -200px;
+        width: 0px;
         height: 15px;
         background-color: #a2a4a5;
         position: absolute;
-        bottom: 300px;
+        bottom: 260px;
         right: -330px;
         transform-origin: left top;
         transform: rotate(-225deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
         animation: drawLine 2s forwards;
+        z-index: -10;
     }
     .deco6 {
         width: 0px;
         height: 15px;
-        background-color: #a7d8f3;
+        background-color: #a7d8f3d7;
         position: absolute;
-        bottom: 470px;
-        right: -520px; /* 시작 위치 (0, 400) */
+        bottom: 390px;
+        right: -530px; /* 시작 위치 (0, 400) */
         transform-origin: left top;
         transform: rotate(-225deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
         animation: drawLine 2s forwards;
+        z-index: -10;
+    }
+    .deco7 {
+        width: 0px;
+        height: 15px;
+        background-color: #a2a4a5c8;
+        position: absolute;
+        top: -190px;
+        right: -640px;
+        transform-origin: left top;
+        transform: rotate(-225deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
+        animation: drawLine 2s forwards;
+        z-index: -10;
+    }
+    .deco8 {
+        width: 0px;
+        height: 15px;
+        background-color: #a7d8f3d2;
+        position: absolute;
+        top: -100px;
+        right: -610px; /* 시작 위치 (0, 400) */
+        transform-origin: left top;
+        transform: rotate(-225deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
+        animation: drawLine 2s forwards;
+        z-index: -10;
+    }
+    .deco9 {
+        width: 0px;
+        height: 20px;
+        background-color: #007cc3c6;
+        position: absolute;
+        bottom: -100px;
+        left: -100px;
+        transform-origin: left top;
+        transform: rotate(-45deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
+        animation: drawLine 2s forwards;
+        z-index: -10;
+    }
+    .deco10 {
+        width: 0px;
+        height: 15px;
+        background-color: #d1e5f0c4;
+        position: absolute;
+        bottom: -195px;
+        left: -130px; /* 시작 위치 (0, 460) */
+        transform-origin: left top;
+        transform: rotate(-45deg); /* 27도 각도로 회전하여 사선 모양으로 만듦 */
+        animation: drawLine 2s forwards;
+        z-index: -10;
     }
 }
 @keyframes drawLine{
@@ -251,7 +305,6 @@ nav{
         width: 500px;
     }
 }
-
 @media (max-width: 1200px){
     #project-Intro-1{
         #Nijariyeogidae{
@@ -262,6 +315,32 @@ nav{
         }
         h3{
             font-size: 15px;
+        }
+    }
+    .active{
+        .deco1 {
+            top: -175px;
+            left: 450px;
+        }
+        .deco2 {
+            top: 415px;
+            left: -240px;
+        }
+        .deco3 {
+            top: 465px;
+            left: -145px;
+        }
+        .deco4 {
+            bottom: -230px;
+            right: -100px;
+        }
+        .deco5 {
+            bottom: 185px;
+            right: -390px;
+        }
+        .deco6 {
+            bottom: 390px;
+            right: -660px;
         }
     }
 }
@@ -281,10 +360,64 @@ nav{
 
 
 /* 프로젝트 소개 페이지2 설정 */
+#project-Intro-2{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: 'JalnanGothic';
+    height: 100vh;
+    overflow: hidden;
 
+    .project-Introduce-2{
+        width: 100%;
+        height: 100%;
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-/* 프로젝트 소개 페이지2 설정 */
+        .project-Intro-2-content{
+
+        }
+    }
+    #barcode-belt{
+        width: 1100px;
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        align-items: center;
+    }
+    h2{
+        font-family: 'JeonjuCraftGoR';
+        text-align: center;
+    }
+    h3{
+        font-family: 'JeonjuCraftGoR';
+        text-align: center;
+    }
+}
+@media(max-width: 1500px){
+    #project-Intro-2{
+        #barcode-belt{
+            width: 800px;
+        }
+        h2{
+            font-size: 18px;
+        }
+    }
+}
+@media(max-width: 800px){
+    #project-Intro-2{
+        #barcode-belt{
+            width: 400px;
+        }
+        h2{
+            font-size: 15px;
+        }
+    }
+}
 
 
 /* 팀원 소개 페이지 설정 */
@@ -338,28 +471,20 @@ nav{
             display: block;
         }
     }
-    #yongwoo{
+    #junhyoung{
         top: 280px;
         left: 200px;
     }
-    #junhyoung{
-        top: 446px;
-        right: 200px;
-    }
     #jisu{
-        bottom: 120px;
+        top: 550px;
         left: 200px;
     }
-    #yong{
+    #jun{
         top: 280px;
         left: 450px;
     }
-    #jun{
-        top: 446px;
-        right: 450px;
-    }
     #ji{
-        bottom: 135px;
+        top: 550px;
         left: 450px;
     }
 }
@@ -394,28 +519,12 @@ nav{
                 display: block;
             }
         }
-        #yongwoo{
-            top: 280px;
-            left: 200px;
-        }
-        #junhyoung{
-            top: 446px;
-            right: 200px;
-        }
-        #jisu{
-            bottom: 120px;
-            left: 200px;
-        }
-        #yong{
+        #jun{
             top: 280px;
             left: 430px;
         }
-        #jun{
-            top: 446px;
-            right: 430px;
-        }
         #ji{
-            bottom: 120px;
+            top: 550px;
             left: 430px;
         }
         h3{
@@ -431,7 +540,7 @@ nav{
         #team-Intro-title{
             position: absolute;
             top: 120px;
-            left: 150px;
+            left: 130px;
         }
         .member-description {
             display: none;
@@ -457,31 +566,21 @@ nav{
                 display: block;
             }
         }
-        #yongwoo{
-            top: 260px;
-            left: 170px;
-        }
         #junhyoung{
-            top: 460px;
-            left: 170px;
+            top: 280px;
+            left: 150px;
         }
         #jisu{
-            top: 660px;
-            left: 170px;
-        }
-        #yong{
-            top: 260px;
-            left: 380px;
+            top: 570px;
+            left: 150px;
         }
         #jun{
-            top: 450px;
-            left: 380px;
-            right: 100px;
+            top: 280px;
+            left: 360px;
         }
         #ji{
-            top: 660px;
-            left: 380px;
-            bottom: 85px;
+            top: 570px;
+            left: 360px;
         }
         h3{
             font-size: 18px;
@@ -527,13 +626,6 @@ nav{
         height: 40px;
         top: 47%;
         left: 23%;
-    }
-    #notion-yongwoo{
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        top: 47%;
-        left: 26%;
     }
     p{
         text-decoration: underline;
@@ -590,13 +682,6 @@ nav{
             top: 42%;
             left: 26%;
         }
-        #notion-yongwoo{
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            top: 42%;
-            left: 32%;
-        }
         p{
             text-decoration: underline;
             font-size: 30px;
@@ -636,13 +721,6 @@ nav{
             top: 42%;
             left: 28%;
         }
-        #notion-yongwoo{
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            top: 42%;
-            left: 36%;
-        }
         p{
             text-decoration: underline;
             font-size: 30px;
@@ -651,4 +729,29 @@ nav{
             left: 20%;
         }
     }
+}
+
+
+/* 버튼 설정 */
+#buttons {
+    position: fixed;
+    z-index: 9999;
+    top: 50%;
+    right: 20px; /* 우측 여백 조절 */
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#buttons button {
+    width: 15px; /* 버튼 크기 조절 */
+    height: 15px; /* 버튼 크기 조절 */
+    border-radius: 50%; /* 원 모양으로 설정 */
+    background-color: white; /* 흰색 배경색 */
+    color: transparent; /* 버튼 텍스트 색상 */
+    margin-bottom: 20px; /* 버튼 간격 조절 */
+    border: none; /* 테두리 제거 */
+    cursor: pointer;
+    outline: none; /* 클릭 시 파란 테두리 제거 */
 }
