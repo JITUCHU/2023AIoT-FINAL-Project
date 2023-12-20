@@ -49,13 +49,6 @@ app.use('/auth', authRouter);
 //     res.redirect('/auth/login');
 //     return false;
 //   }
-//   var html = template.HTML('Welcome',
-//     `<hr>
-//         <h2>메인 페이지에 오신 것을 환영합니다</h2>
-//         <p>로그인에 성공하셨습니다.</p>`,
-//     authCheck.statusUI(req, res)
-//   );
-//   res.send(html);
 // })
 
 app.get('/main', (request, response) => {

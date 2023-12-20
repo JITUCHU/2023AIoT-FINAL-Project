@@ -26,120 +26,120 @@ router.get('/login', function (request, response) {
 });
 
 
-// router.post('/login_process', function (request, response) {
-//     var username = request.body.id;
-//     var password = request.body.pass;
+router.post('/login_process', function (request, response) {
+    var username = request.body.id;
+    var password = request.body.pass;
 
-//     if (username && password) {
-//         db.query('SELECT * FROM usertable WHERE id = ?', [username], function (error, results, fields) {
-//             if (error) throw error;
+    if (username && password) {
+        db.query('SELECT * FROM usertable WHERE id = ?', [username], function (error, results, fields) {
+            if (error) throw error;
 
-//             if (results.length > 0) {
-//                 const storedPasswordHash = results[0].pass;
-//                 const storedSalt = results[0].salt;
+            if (results.length > 0) {
+                const storedPasswordHash = results[0].pass;
+                const storedSalt = results[0].salt;
 
-//                 // 입력된 비밀번호와 저장된 salt를 이용하여 해싱
-//                 const hashedPassword = crypto.pbkdf2Sync(password, storedSalt, 10000, 64, 'sha256').toString('hex');
+                // 입력된 비밀번호와 저장된 salt를 이용하여 해싱
+                const hashedPassword = crypto.pbkdf2Sync(password, storedSalt, 10000, 64, 'sha256').toString('hex');
 
-//                 // 저장된 해시값과 입력된 비밀번호의 해시값 비교
-//                 if (hashedPassword === storedPasswordHash) {
-//                     // 로그인 성공
-//                     request.session.is_logined = true;
-//                     request.session.nickname = username;
-//                     request.session.save(function () {
-//                         response.redirect(`/`);
-//                     });
-//                 } else {
-//                     // 비밀번호 불일치
-//                     response.send(`<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); 
-//                     document.location.href="/auth/login";</script>`);
-//                 }
-//             } else {
-//                 // 해당 아이디가 없음
-//                 response.send(`<script type="text/javascript">alert("존재하지 않는 아이디 입니다."); 
-//                 document.location.href="/auth/login";</script>`);
-//             }
-//         });
+                // 저장된 해시값과 입력된 비밀번호의 해시값 비교
+                if (hashedPassword === storedPasswordHash) {
+                    // 로그인 성공
+                    request.session.is_logined = true;
+                    request.session.nickname = username;
+                    request.session.save(function () {
+                        response.redirect(`/`);
+                    });
+                } else {
+                    // 비밀번호 불일치
+                    response.send(`<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); 
+                    document.location.href="/auth/login";</script>`);
+                }
+            } else {
+                // 해당 아이디가 없음
+                response.send(`<script type="text/javascript">alert("존재하지 않는 아이디 입니다."); 
+                document.location.href="/auth/login";</script>`);
+            }
+        });
 
-//     } else {
-//         // 아이디와 비밀번호 입력 요청
-//         response.send(`<script type="text/javascript">alert("아이디와 비밀번호를 입력하세요!"); 
-//         document.location.href="/auth/login";</script>`);
-//     }
-// });
+    } else {
+        // 아이디와 비밀번호 입력 요청
+        response.send(`<script type="text/javascript">alert("아이디와 비밀번호를 입력하세요!"); 
+        document.location.href="/auth/login";</script>`);
+    }
+});
 
 
-// // 로그아웃
-// router.get('/logout', function (request, response) {
+// 로그아웃
+router.get('/logout', function (request, response) {
     
-//     request.session.destroy(function (err) {
-//         response.redirect('/');
-//     });
-// });
+    request.session.destroy(function (err) {
+        response.redirect('/');
+    });
+});
 
 
 
-// // 관리자에게 문의하기
-// router.get('/question', function(request, response) {  
-//     var html =(`
-//     <div id="contact">
-//         <h1>관리자 문의 페이지</h1>
-//         <form action="/auth/question_prosess" method="post">
-//             <fieldset>
-//                 <label for="category">문의 종류 :</label>
-//                     <select name="category" >
-//                     <option value="sign_up" >페이지 권한 요청</option>
-//                     <option value="login_erorr" >로그인 불가</option>
-//                     <option value="find_id" >아이디 찾기</option>
-//                     <option value="find_pass" >비밀번호 찾기</option>
-//                     <option value="etc" >기타</option>
-//                     </select>
-//                 <label for="name">이름 :</label>
-//                 <input type="text" id="name" name="name" placeholder="Enter your full name" />
+// 관리자에게 문의하기
+router.get('/question', function(request, response) {  
+    var html =(`
+    <div id="contact">
+        <h1>관리자 문의 페이지</h1>
+        <form action="/auth/question_prosess" method="post">
+            <fieldset>
+                <label for="category">문의 종류 :</label>
+                    <select name="category" >
+                    <option value="sign_up" >페이지 권한 요청</option>
+                    <option value="login_erorr" >로그인 불가</option>
+                    <option value="find_id" >아이디 찾기</option>
+                    <option value="find_pass" >비밀번호 찾기</option>
+                    <option value="etc" >기타</option>
+                    </select>
+                <label for="name">이름 :</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" />
                 
-//                 <label for="email">Email:</label>
-//                 <input type="email" id="email" name="email" placeholder="Enter your email address" />
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" />
                 
-//                 <label for="message">문의 내용 :</label>
-//                 <textarea id="message" name="message" placeholder="What's on your mind?"></textarea>
+                <label for="message">문의 내용 :</label>
+                <textarea id="message" name="message" placeholder="What's on your mind?"></textarea>
                 
-//                 <input type="submit" value="제출 하기" />
+                <input type="submit" value="제출 하기" />
 
-//             </fieldset>
-//         </form>
-//     </div>
-//     `);
-//     var log_status=authCheck.isOwner(request)
-//     response.render('question',{html,log_status});
-// });
+            </fieldset>
+        </form>
+    </div>
+    `);
+    var log_status=authCheck.isOwner(request)
+    response.render('question',{html,log_status});
+});
 
 
-// router.post('/question_prosess', function(request, response){
-//     const category =request.body.category
-//     const name =request.body.name
-//     const email = request.body.email
-//     const message = request.body.message
-//     if (name && email && message){
-//         mailOptions.subject= `문의 카테고리: ${category}`
-//         mailOptions.text = `이름: ${name}\nEmail: ${email}\n문의 내용:\n${message}`
-//         transporter.sendMail(mailOptions, function(error, info) {
-//             if (error) {
-//                 console.error(error);
-//                 response.send(`<script type="text/javascript">alert("이메일 발송중 오류가 발생하였습니다!"); 
-//                 document.location.href="/auth/question";</script>`);
-//             } else {
-//                 console.log('Email sent: ' + info.response);
-//                 response.send(`<script type="text/javascript">alert("문의가 성공적으로 제출되었습니다!"); 
-//                 document.location.href="/auth/question";</script>`);
-//             }
-//         });
-//     } else{
-//         response.send(`<script type="text/javascript">alert("입력되지 않은 정보가 있습니다."); 
-//         document.location.href="/auth/question";</script>`);
-//     }
+router.post('/question_prosess', function(request, response){
+    const category =request.body.category
+    const name =request.body.name
+    const email = request.body.email
+    const message = request.body.message
+    if (name && email && message){
+        mailOptions.subject= `문의 카테고리: ${category}`
+        mailOptions.text = `이름: ${name}\nEmail: ${email}\n문의 내용:\n${message}`
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                console.error(error);
+                response.send(`<script type="text/javascript">alert("이메일 발송중 오류가 발생하였습니다!"); 
+                document.location.href="/auth/question";</script>`);
+            } else {
+                console.log('Email sent: ' + info.response);
+                response.send(`<script type="text/javascript">alert("문의가 성공적으로 제출되었습니다!"); 
+                document.location.href="/auth/question";</script>`);
+            }
+        });
+    } else{
+        response.send(`<script type="text/javascript">alert("입력되지 않은 정보가 있습니다."); 
+        document.location.href="/auth/question";</script>`);
+    }
 
     
-// });
+});
 
 
 

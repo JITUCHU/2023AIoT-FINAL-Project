@@ -20,7 +20,7 @@
                 <li><a href="http://localhost:3000/auth/login">로그인</a></li>
                 <li><a href="#management">물류관리</a></li>
                 <li><a href="#status">분류현황</a></li>
-                <li><a href="./login/public/question.ejs">고객지원</a></li>
+                <li><a href="http://localhost:3000/auth/question">고객지원</a></li>
             </ul>
         </nav>
     </header>
@@ -130,7 +130,7 @@
             <a href="https://www.notion.so/6855e9fd82ff4220b69e527a998cf981?pvs=4">
                 <img id="notion-junhyoung" src="./images/notion-logo.png" alt="준형노션">
             </a>
-            <a class="question-programer" href="question.ejs">개발자에게 문의하기</a>
+            <a class="question-programer" href="http://localhost:3000/auth/question">개발자에게 문의하기</a>
             <footer>
                 <div>
                     </br>
@@ -139,14 +139,14 @@
             </footer>
         </div>
 
-        <!-- 버튼 -->
+        <!-- 버튼
         <div id="buttons">
             <button class="paging"></button>
             <button class="paging"></button>
             <button class="paging"></button>
             <button class="paging"></button>
             <button class="paging"></button>
-        </div>
+        </div> -->
     </div>
 
     <script src="jquery-3.7.1.js"></script>
@@ -155,18 +155,22 @@
     <script>
         $(document).ready(function() {
             $('#fullpage').fullpage({
-                anchors: ['page1', 'page2', 'page3', 'page4', 'page5']
+                // anchors: ['page1', 'page2', 'page3', 'page4', 'page5']
+                autoScrolling:true,
+                scrollHorizontally: true,
+                navigation: true,
+                navigationPosition: 'right'
             });
 
             // 각 버튼에 대한 클릭 이벤트를 추가합니다.
-            $($(".paging")[0]).click(function(){ 
-                $.fn.fullpage.moveTo("page1")
-                //$('#fullpage').moveTo("page1")
-            })
-            $($(".paging")[1]).click(function(){ $.fn.fullpage.moveTo("page2") })
-            $($(".paging")[2]).click(function(){ $.fn.fullpage.moveTo("page3") })
-            $($(".paging")[3]).click(function(){ $.fn.fullpage.moveTo("page4") })
-            $($(".paging")[4]).click(function(){ $.fn.fullpage.moveTo("page5") })
+            // $($(".paging")[0]).click(function(){ 
+            //     $.fn.fullpage.moveTo("page1")
+            //     //$('#fullpage').moveTo("page1")
+            // })
+            // $($(".paging")[1]).click(function(){ $.fn.fullpage.moveTo("page2") })
+            // $($(".paging")[2]).click(function(){ $.fn.fullpage.moveTo("page3") })
+            // $($(".paging")[3]).click(function(){ $.fn.fullpage.moveTo("page4") })
+            // $($(".paging")[4]).click(function(){ $.fn.fullpage.moveTo("page5") })
         });
     </script>
 </body>
