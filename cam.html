@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webcam Viewer</title>
+    <link href="cam.css" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="./images/로고_흰색글씨.png" alt="로고">
+            <ul>
+                <li><a href="http://localhost:3000/auth/login">로그인</a></li>
+                <li><a href="#management">물류관리</a></li>
+                <li><a href="#status">분류현황</a></li>
+                <li><a href="http://localhost:3000/auth/question">고객지원</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div id="monitor-frame">
+        <div id="webcam-area">
+            <video id="video" autoplay></video>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.error('Error accessing the webcam:', error);
+                });
+        } else {
+            alert('Sorry, your browser does not support getUserMedia');
+        }
+    </script>
+</body>
+</html>

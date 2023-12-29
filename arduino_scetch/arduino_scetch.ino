@@ -123,7 +123,7 @@ void loop() {
 
   unsigned int vr = map(analogRead(A0), 0, 1023, 0, 511);
 
-  if(infrared_1 <= 100 || infrared_2 <= 100){
+  if(infrared_1 <= 900 || infrared_2 <= 900){
     delay(1000);
   }
   else{
