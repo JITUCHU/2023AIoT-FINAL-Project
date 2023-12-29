@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/status.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="/index.css">
+    <title>Status_Result</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="/images/로고_흰색글씨.png" alt="로고">
+            <ul>
+                <li><a href="#management">물류관리</a></li>
+                <li><a href="/status">분류현황</a></li>
+                <li><a href="/auth/question">고객지원</a></li>
+                <% if (log_status){%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/logout">록아웃</a>
+                    </li>
+                <% }else{ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/login">록인</a>
+                    </li>   
+                <%}%> 
+            </ul>
+        </nav>
+    </header>
+        <div class="statusbox animate__animated animate__bounceInLeft">
+            <table>
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>물품명</th>
+                    <th>수하 시간</th>
+                    <th>QR코드</th>
+            
+                </tr>
+                </thead>
+                <% for(var i =0; i < data.length; i++){%>
+                <tbody>
+                <tr>
+                    <td><%= i +1 %></td>
+                    <td><%- data[i].product_name %></td>
+                    <td><%- data[i].drop_offAt %></td>
+                    <td><%- data[i].barcode %></td>
+                </tr>
+                </tbody>
+                <% } %>
+            </table>
+        </div>
+    <div class="background statusbox animate__animated animate__bounceInLeft">
+        <% for(var i =0; i < data.length; i++){%>
+            <div class="background box animate__animated animate__slideInLeft">
+                <div calss=" box">
+                    <!-- <%- data[i].section %> -->
+                    <p><%- data[i].drop_offAt %></p>
+                    <p><%- data[i].product_name %></p>
+                    <%- data[i].barcode %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+    <span hidden class="hidden-value"><%= data.length %></span>
+    <script>
+        console.log(document.querySelector(".hidden-value").textContent)
+        const cnt = document.querySelector(".hidden-value").textContent
+        if(cnt <= 4){
+            document.querySelector(".statusbox").style.height ="200px"
+        }
+        else if(cnt <= 8 && cnt >=5){
+            document.querySelector(".statusbox").style.height ="400px"
+        }
+        else if(cnt <= 12 && cnt >=9){
+            document.querySelector(".statusbox").style.height ="600px"
+        }
+    </script>
+</body>
+</html>
