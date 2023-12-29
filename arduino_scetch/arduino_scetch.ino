@@ -139,9 +139,10 @@ void loop() {
     delay(10);
 
     if(Serial.available() > 0){
+      // char chRead = Serial.read();
       String strRead = Serial.readStringUntil('\n');
       char chRead = strRead.charAt(0);
-      Serial.print(chRead);
+      Serial.println(chRead);
 
       ASMotorAct(chRead);
       displaySegment(chRead);
