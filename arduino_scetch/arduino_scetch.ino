@@ -2,13 +2,13 @@
 #include "PCA9685.h"
 
 // 세그먼트 핀 번호
-#define A D1
-#define B D2
-#define C D3
-#define D D4
-#define E D5
-#define F D6
-#define G D7
+#define A 1
+#define B 2
+#define C 3
+#define D 4
+#define E 5
+#define F 6
+#define G 7
 
 // 컨베이어 벨트 모터 핀 번호
 #define CB_MOTOR_1 9
@@ -22,14 +22,6 @@ const int AS_MOTOR_2 = 1; // 2번 모터
 
 // 세그먼트 출력 함수
 void displaySegment(char ch) {
-  digitalWrite(A, HIGH);
-  digitalWrite(B, HIGH);
-  digitalWrite(C, HIGH);
-  digitalWrite(D, HIGH);
-  digitalWrite(E, HIGH);
-  digitalWrite(F, HIGH);
-  digitalWrite(G, HIGH);
-
   switch (ch) {
     case '1':
       digitalWrite(B, LOW);
@@ -69,18 +61,21 @@ void clearSegment() {
 void ASMotorAct(char ch) {
   switch (ch) {
     case '1':
-      delay(1000);
-      driver.setChannelPWM(AS_MOTOR_1, pwmServo.pwmForAngle(70));
+      displaySegment(ch);
       delay(4000);
+      driver.setChannelPWM(AS_MOTOR_1, pwmServo.pwmForAngle(70));
+      delay(5000);
       driver.setChannelPWM(AS_MOTOR_1, pwmServo.pwmForAngle(0));
       break;
     case '2':
-      delay(3000);
+      displaySegment(ch);
+      delay(9000);
       driver.setChannelPWM(AS_MOTOR_2, pwmServo.pwmForAngle(-70));
-      delay(4000);
+      delay(5000);
       driver.setChannelPWM(AS_MOTOR_2, pwmServo.pwmForAngle(0));
       break;
     case 'E':
+      displaySegment(ch);
       break;
     default:
       break;
@@ -117,25 +112,24 @@ void loop() {
   unsigned int vr = map(analogRead(A0), 0, 1023, 0, 511);
 
   if(vr < 256)
-    {
-      analogWrite(CB_MOTOR_1, 255-vr);
-      analogWrite(CB_MOTOR_2, 0);
-    }
-    else{
-      analogWrite(CB_MOTOR_1, 0);
-      analogWrite(CB_MOTOR_2, vr-256);
-    }
-    delay(10);
+  {
+    analogWrite(CB_MOTOR_1, 255-vr);
+    analogWrite(CB_MOTOR_2, 0);
+  }
+  else{
+    analogWrite(CB_MOTOR_1, 0);
+    analogWrite(CB_MOTOR_2, vr-256);
+  }
+  delay(10);
 
-    if(Serial.available() > 0){
-      // char chRead = Serial.read();
-      String strRead = Serial.readStringUntil('\n');
-      char chRead = strRead.charAt(0);
-      Serial.println(chRead);
+  if(Serial.available() > 0){
+    // char chRead = Serial.read();
+    String strRead = Serial.readStringUntil('\n');
+    char chRead = strRead.charAt(0);
+    Serial.println(chRead);
 
-      ASMotorAct(chRead);
-      displaySegment(chRead);
-      delay(2000);
-      clearSegment();
-    }
+    ASMotorAct(chRead);
+    delay(2000);
+    clearSegment();
+  }
 }
