@@ -2,21 +2,17 @@
 #include "PCA9685.h"
 
 // 세그먼트 핀 번호
-#define A 1
-#define B 2
-#define C 3
-#define D 4
-#define E 5
-#define F 6
-#define G 7
+#define A D1
+#define B D2
+#define C D3
+#define D D4
+#define E D5
+#define F D6
+#define G D7
 
 // 컨베이어 벨트 모터 핀 번호
 #define CB_MOTOR_1 9
 #define CB_MOTOR_2 10
-
-// 적외선 센서 핀 번호
-#define INFRARED_1 A1
-#define INFRARED_2 A2
 
 PCA9685 driver;
 PCA9685_ServoEval pwmServo(102, 470); // (-90deg, +90deg)
@@ -73,13 +69,15 @@ void clearSegment() {
 void ASMotorAct(char ch) {
   switch (ch) {
     case '1':
+      delay(1000);
       driver.setChannelPWM(AS_MOTOR_1, pwmServo.pwmForAngle(70));
-      delay(2000);
+      delay(4000);
       driver.setChannelPWM(AS_MOTOR_1, pwmServo.pwmForAngle(0));
       break;
     case '2':
+      delay(3000);
       driver.setChannelPWM(AS_MOTOR_2, pwmServo.pwmForAngle(-70));
-      delay(2000);
+      delay(4000);
       driver.setChannelPWM(AS_MOTOR_2, pwmServo.pwmForAngle(0));
       break;
     case 'E':
@@ -99,8 +97,6 @@ void setup() {
   driver.setPWMFrequency(50);   // Set frequency to 50Hz
 
   Serial.begin(9600); // 시리얼 통신 시작
-  pinMode(INFRARED_1, INPUT);
-  pinMode(INFRARED_2, INPUT);
   pinMode(A, OUTPUT);
   pinMode(B, OUTPUT);
   pinMode(C, OUTPUT);
@@ -118,16 +114,9 @@ void setup() {
 // 루프
 void loop() {
 
-  int infrared_1 = analogRead(INFRARED_1);
-  int infrared_2 = analogRead(INFRARED_2);
-
   unsigned int vr = map(analogRead(A0), 0, 1023, 0, 511);
 
-  if(infrared_1 <= 900 || infrared_2 <= 900){
-    delay(1000);
-  }
-  else{
-    if(vr < 256)
+  if(vr < 256)
     {
       analogWrite(CB_MOTOR_1, 255-vr);
       analogWrite(CB_MOTOR_2, 0);
@@ -149,5 +138,4 @@ void loop() {
       delay(2000);
       clearSegment();
     }
-  }
 }
