@@ -3,40 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <title>WelCome</title>
+    <title>니자리여기어때_정신개조</title>
+    <link rel="stylesheet" href="fullPage.js-2.9.7/dist/jquery.fullpage.min.css"/>
+    <link href="index.css" rel="stylesheet"/>
+    <style>
+        .fp-tableCell{
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav>
-            <a href="index.html">
+            <a href="/main">
                 <img src="./images/로고_흰색글씨.png" alt="로고">
             </a>
             <ul>
+                <li><a href="/auth/login">로그인</a></li>
                 <li><a href="#management">물류관리</a></li>
                 <li><a href="/status">분류현황</a></li>
-                <li><a href="cam.html">View</a></li>
                 <li><a href="/auth/question">고객지원</a></li>
-                <% if (log_status){%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/auth/logout">록아웃</a>
-                    </li>
-                <% }else{ %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/auth/login">록인</a>
-                    </li>   
-                <%}%> 
             </ul>
         </nav>
     </header>
 
-    <div class="background animate__animated animate__bounceInLeft">
-        <%= welcome%><a href="/auth/logout">로그아웃</a>
-        <hr>
-        <h2>메인 페이지에 오신 것을 환영합니다</h2>
-        <p>로그인에 성공하셨습니다.</p>
+    <div id="fullpage">
+        <!-- 시작 페이지 -->
+        <div class="section" id="start-main-page"  data-anchor="page1">
+            <p class="container">
+                스마트 물류 시스템</br>
+                Mental Reform
+            </p>
+            <div class="video-container">
+                <video data-autoplay muted loop>
+                    <source src="./images/메인2.mp4" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+        </div>
+
+        <!-- 프로젝트소개 1 -->
+        <div class="section" id="project-Intro-1"  data-anchor="page2">
+            <div class="project-Introduce-1">
+                <div class="deco1"></div>
+                <div class="deco2"></div>
+                <div class="deco3"></div>
+                <div class="deco4"></div>
+                <div class="deco5"></div>
+                <div class="deco6"></div>
+                <div class="project-Intro-1-content">
+                    <img id="Nijariyeogidae" src="./images/니자리여기어때.png" alt="니자리여기어때">
+                    <h2>
+                        스마트 물류 시스템인 "니자리 여기어때"는</br>
+                        정신개조에 의해 개발된 자동 물류 분류 시스템으로,
+                    </h2>
+                    <h3>
+                        각종 센서를 아두이노로 제어하고 QR코드를 YOLOv8을 통해 분석하여</br>
+                        물류의 분류 및 데이터 관리를 할 수 있는 시스템입니다.
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트소개 2 -->
+        <div class="section" id="project-Intro-2" data-anchor="page3">
+            <div class="project-Introduce-2">
+                <div class="deco7"></div>
+                <div class="deco8"></div>
+                <div class="deco9"></div>
+                <div class="deco10"></div>
+                <div class="project-Intro-2-content">
+                    <img id="barcode-belt" src="./images/바코드-벨트.png" alt="바코드-벨트">
+                    <h2>YOLO로 학습시킨 모델을 사용하여 물품의 바코드를 감지하고, 해당 물품 정보를 분석합니다.</br>
+                        분석한 데이터를 기반으로 2개의 구역 중 어느 곳으로 물품을 분류할지</br>
+                        자동으로 결정하여 물류를 처리하는 자동화 시스템입니다.
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- 팀원소개 -->
+        <div class="section" id="team-Intro" data-anchor="page4">
+            <div class="video-container">
+                <video data-autoplay muted loop>
+                    <source src="./images/메인3.mp4" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+            <h1 id="team-Intro-title">정신개조</br>Mental Reform</h1>
+            <div class="member">
+                <img id="junhyoung" src="./images/최준형소개.jpg" alt="최준형소개사진">
+                <div class="member-description" id="jun">
+                    <h3>최준형</h3>
+                    <p>팀원</p>
+                    <p> - 바코드 인식 기능 구현</p>
+                    <p> - 로그인 기능과 개발자에게 문의 기능 구현 및 디자인</p>
+                    <p> - 데이터베이스 모델링 및 관리</p>
+                    <p> - 분류현황파악기능 구현 및 디자인</p>
+                    <p>도전을 즐기고 실패를 두려워하지 않는 개발자 최준형입니다.</p>
+                    <p>Email : wnsgud0812@naver.com</p>
+                </div>
+            </div>
+            <div class="member">
+                <img id="jisu" src="./images/황지수소개.jpg" alt="황지수소개사진">
+                <div class="member-description" id="ji">
+                    <h3>황지수</h3>
+                    <p>팀장</p>
+                    <p> - 메인 페이지 디자인</p>
+                    <p> - 하드웨어 설계 및 제작</p>
+                    <p> - 아두이노 스케치를 통한 센서 제어</p>
+                    <p> - QR코드 정보 추가 및 검색, 삭제 기능 구현 및 디자인</p>
+                    <p>자신감과 열정으로 기술의 가능성을 끌어올리는 개발자 황지수입니다.</p>
+                    <p>Email : jeesu0320@naver.com</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 마지막 페이지 -->
+        <div class="section" id="last-main-page" data-anchor="page5">
+            <p>니자리 여기어때</br>정신개조 프로젝트</p>
+            <img id="logo" src="./images/로고_검정글씨.png" alt="로고">
+            <a href="https://github.com/JITUCHU/2023AIoT-FINAL-Project">
+                <img id="github-logo" src="./images/github-logo.png" alt="깃허브로고">
+            </a>
+            <a href="https://warp-panther-f8f.notion.site/365bff7c8bdc4cb384ee1796c10b7b68">
+                <img id="notion-jisu" src="./images/notion-logo.png" alt="지수노션">
+            </a>
+            <a href="https://www.notion.so/6855e9fd82ff4220b69e527a998cf981?pvs=4">
+                <img id="notion-junhyoung" src="./images/notion-logo.png" alt="준형노션">
+            </a>
+            <a class="question-programer" href="http://localhost:3000/auth/question">개발자에게 문의하기</a>
+            <footer>
+                <div>
+                    </br>
+                    &copy; 정신개조 2023 AIoT 최종 프로젝트
+                </div>
+            </footer>
+        </div>
+
+        <!-- 버튼
+        <div id="buttons">
+            <button class="paging"></button>
+            <button class="paging"></button>
+            <button class="paging"></button>
+            <button class="paging"></button>
+            <button class="paging"></button>
+        </div> -->
     </div>
+
+    <script src="jquery-3.7.1.js"></script>
+    <script src="fullPage.js-2.9.7/dist/jquery.fullpage.min.js"></script>
+    <script src="fullPage.js-2.9.7/dist/jquery.fullpage.extensions.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#fullpage').fullpage({
+                // anchors: ['page1', 'page2', 'page3', 'page4', 'page5']
+                autoScrolling:true,
+                scrollHorizontally: true,
+                navigation: true,
+                navigationPosition: 'right'
+            });
+
+            // 각 버튼에 대한 클릭 이벤트를 추가합니다.
+            // $($(".paging")[0]).click(function(){ 
+            //     $.fn.fullpage.moveTo("page1")
+            //     //$('#fullpage').moveTo("page1")
+            // })
+            // $($(".paging")[1]).click(function(){ $.fn.fullpage.moveTo("page2") })
+            // $($(".paging")[2]).click(function(){ $.fn.fullpage.moveTo("page3") })
+            // $($(".paging")[3]).click(function(){ $.fn.fullpage.moveTo("page4") })
+            // $($(".paging")[4]).click(function(){ $.fn.fullpage.moveTo("page5") })
+        });
+    </script>
 </body>
 </html>

@@ -8,7 +8,9 @@ var template = require('./template.js');
 var db = require('./db');
 const authCheck = require('./authCheck.js');
 
-
+router.use(
+    express.static(__dirname + "/public"
+))
 // 로그인 화면
 router.get('/login', function (request, response) {
     var html = (`

@@ -15,6 +15,7 @@ const template = require('./template.js');
 const app = express()
 const port = 3000
 
+
 app.set('view engine','ejs')
 app.set('views','./public')
 
@@ -41,6 +42,10 @@ app.get('/', (req, res) => {
   }
 })
 
+app.get('/cam',(request,response) =>{
+    response.render('cam')
+})
+
 // 인증 라우터
 app.use('/auth', authRouter);
 
@@ -59,15 +64,20 @@ app.use('/auth', authRouter);
 //   res.send(html);
 // })
 
-app.get('/main', (request, response) => {
-  if (!authCheck.isOwner(request, response)) {  // 로그인 안되어있으면 로그인 페이지로 이동시킴
-    response.redirect('/auth/login');
-    return false;
-  }
-  welcome = authCheck.statusUI(request)
-  var log_status=authCheck.isOwner(request)
-  response.render('main',{welcome,log_status});
+// app.get('/main', (request, response) => {
+//   var log_status= 0
+//   if (!authCheck.isOwner(request, response)) {  // 로그인 안되어있으면 로그인 페이지로 이동시킴
+//     response.render('main',{log_status});
+//   }
+//   log_status=authCheck.isOwner(request)
+//   response.render('main',{log_status});
+// })
+
+app.get('/main',(request,response) =>{
+  response.render('main');
 })
+
+
 app.get('/status', (request,response) =>{
   if(!authCheck.isOwner(request,response)){
     response.redirect('/auth/login');
