@@ -14,10 +14,6 @@
 #define CB_MOTOR_1 9
 #define CB_MOTOR_2 10
 
-// 적외선 센서 핀 번호
-#define INFRARED_1 A1
-#define INFRARED_2 A2
-
 PCA9685 driver;
 PCA9685_ServoEval pwmServo(102, 470); // (-90deg, +90deg)
 
@@ -26,14 +22,6 @@ const int AS_MOTOR_2 = 1; // 2번 모터
 
 // 세그먼트 출력 함수
 void displaySegment(char ch) {
-  digitalWrite(A, HIGH);
-  digitalWrite(B, HIGH);
-  digitalWrite(C, HIGH);
-  digitalWrite(D, HIGH);
-  digitalWrite(E, HIGH);
-  digitalWrite(F, HIGH);
-  digitalWrite(G, HIGH);
-
   switch (ch) {
     case '1':
       digitalWrite(B, LOW);
@@ -73,16 +61,21 @@ void clearSegment() {
 void ASMotorAct(char ch) {
   switch (ch) {
     case '1':
+      displaySegment(ch);
+      delay(4000);
       driver.setChannelPWM(AS_MOTOR_1, pwmServo.pwmForAngle(70));
-      delay(2000);
+      delay(5000);
       driver.setChannelPWM(AS_MOTOR_1, pwmServo.pwmForAngle(0));
       break;
     case '2':
+      displaySegment(ch);
+      delay(9000);
       driver.setChannelPWM(AS_MOTOR_2, pwmServo.pwmForAngle(-70));
-      delay(2000);
+      delay(5000);
       driver.setChannelPWM(AS_MOTOR_2, pwmServo.pwmForAngle(0));
       break;
     case 'E':
+      displaySegment(ch);
       break;
     default:
       break;
@@ -99,8 +92,6 @@ void setup() {
   driver.setPWMFrequency(50);   // Set frequency to 50Hz
 
   Serial.begin(9600); // 시리얼 통신 시작
-  pinMode(INFRARED_1, INPUT);
-  pinMode(INFRARED_2, INPUT);
   pinMode(A, OUTPUT);
   pinMode(B, OUTPUT);
   pinMode(C, OUTPUT);
@@ -118,36 +109,27 @@ void setup() {
 // 루프
 void loop() {
 
-  int infrared_1 = analogRead(INFRARED_1);
-  int infrared_2 = analogRead(INFRARED_2);
-
   unsigned int vr = map(analogRead(A0), 0, 1023, 0, 511);
 
-  if(infrared_1 <= 100 || infrared_2 <= 100){
-    delay(1000);
+  if(vr < 256)
+  {
+    analogWrite(CB_MOTOR_1, 255-vr);
+    analogWrite(CB_MOTOR_2, 0);
   }
   else{
-    if(vr < 256)
-    {
-      analogWrite(CB_MOTOR_1, 255-vr);
-      analogWrite(CB_MOTOR_2, 0);
-    }
-    else{
-      analogWrite(CB_MOTOR_1, 0);
-      analogWrite(CB_MOTOR_2, vr-256);
-    }
-    delay(10);
+    analogWrite(CB_MOTOR_1, 0);
+    analogWrite(CB_MOTOR_2, vr-256);
+  }
+  delay(10);
 
-    if(Serial.available() > 0){
-      // char chRead = Serial.read();
-      String strRead = Serial.readStringUntil('\n');
-      char chRead = strRead.charAt(0);
-      Serial.println(chRead);
+  if(Serial.available() > 0){
+    // char chRead = Serial.read();
+    String strRead = Serial.readStringUntil('\n');
+    char chRead = strRead.charAt(0);
+    Serial.println(chRead);
 
-      ASMotorAct(chRead);
-      displaySegment(chRead);
-      delay(2000);
-      clearSegment();
-    }
+    ASMotorAct(chRead);
+    delay(2000);
+    clearSegment();
   }
 }

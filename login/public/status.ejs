@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="/status.css"> -->
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -11,6 +12,10 @@
         input[id*="item"]{
             box-shadow: none;
         }
+        fieldset[id="radio"]{
+            text-align: right;
+        }
+
     </style>
 </head>
 <body>
@@ -33,49 +38,230 @@
             </ul>
         </nav>
     </header>
-    <div class="background animate__animated animate__bounceInLeft">
-        <!-- <form action="/status_process" method="post">
-            <fieldset>
-                <label for="category">문의 종류 :</label>
-                    <select name="category" >
-                    <option value="sign_up" >페이지 권한 요청</option>
-                    <option value="login_erorr" >로그인 불가</option>
-                    <option value="find_id" >아이디 찾기</option>
-                    <option value="find_pass" >비밀번호 찾기</option>
-                    <option value="etc" >기타</option>
-                    </select>
-                <label for="name">이름 :</label>
-                <input type="text" id="name" name="name" placeholder="Enter your full name" />
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email address" />
-                
-                <label for="message">문의 내용 :</label>
-                <textarea id="message" name="message" placeholder="What's on your mind?"></textarea>
-                
-                <input type="submit" value="제출 하기" />
-
-            </fieldset>
-        </form>
-    </div> -->
-    <div id="contact">
-        <h1>분류 현황 확인</h1>
-        <br>
-        <form action="/status_process" method="post">
-            <fieldset>
-                <label for="item1">1 구역</label>
-                <input type="radio" id="item1" name="item" value="1"/>
-                <label for="item2">2 구역</label>
-                <input type="radio" id="item2" name="item" value="2"/>
-                <label for="item3">3 구역</label>
-                <input type="radio" id="item3" name="item" value="3"/>
-                <br>
-                <br>
-                <br>
-                <input type="submit" value="확인" />
-
-            </fieldset>
-        </form>
+    <div style="display: flex; max-width: 1000px;" class="statusbox background animate__animated animate__bounceInLeft">
+        <div style="max-width: 500px;">
+            <canvas id="hoverPieChart" width="400px" height="400px"></canvas>
+        </div>
+        <div style="max-width: 500px;">
+            <canvas id="hoverPieChart2" width="400px" height="400px"></canvas>
+        </div>
     </div>
+    <!-- <div hidden class="statusbox background animate__animated animate__bounceInLeft">
+        <div id="contact">
+            <h1>세부 분류 현황 확인</h1>
+            <br>
+            <form action="/status_process" method="post" name="sub">
+                <fieldset id="radio">
+                    <label for="item1">1 구역</label>
+                    <input type="radio" id="item1" name="item" value="1"/>
+                    <label for="item2">2 구역</label>
+                    <input type="radio" id="item2" name="item" value="2"/>
+                    <label for="item3">3 구역</label>
+                    <input type="radio" id="item3" name="item" value="3"/>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="submit" value="확인" />
+    
+                </fieldset>
+            </form>
+        </div>
+    </div> -->
+    <span hidden class="hidden-value"><%= to_page.length %></span>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script>
+        let data = '<%=to_page%>'
+        let digital =0;
+        let books =0;
+        let clothes =0;
+        let food =0;
+        let total1 =0; 
+        let total2 =0; 
+
+        data = data.replaceAll("&#34;", '"')
+        data = data.replaceAll("[", "")
+        data = data.replaceAll("]", "")
+        data = data.split("},")
+            
+        data.forEach(function(item, index){
+            let value = item;
+            if(index != data.length - 1){ value += '}' }
+            // console.log(index, JSON.parse(value))
+            if(JSON.parse(value).section == 1){
+                if(JSON.parse(value).barcode.slice(0,7) == "digital") {
+                    digital ++
+                }
+                else if(JSON.parse(value).barcode.slice(0,5) == "books") {
+                    books ++
+                }
+                total1 ++
+            }
+            else if(JSON.parse(value).section == 2){
+                if(JSON.parse(value).barcode.slice(0,7) == "clothes") {
+                    clothes ++
+                }
+                else if(JSON.parse(value).barcode.slice(0,4) == "food") {
+                    food ++
+                }
+                total2++
+            }
+        })
+        // console.log(count)
+        
+
+        // 그래프 1
+        const hoverPieChartCtx = document.querySelector('#hoverPieChart').getContext('2d');
+        const hoverPieChart = new Chart(hoverPieChartCtx, {
+            type: 'pie',
+            data:{
+                labels:['전자기기', '책'],
+                datasets:[{
+                data: [digital,books,0],
+                    backgroundColor: [
+                        'rgba(255,99,132, 0.6)',
+                        'rgba(54,162,235, 0.6)'],
+                    borderColor: [
+                        'rgba(255,99,132, 0.6)',
+                        'rgba(54,162,235, 0.6)'],
+                    borderWidth: 1,
+                    hoverBackgroundColor:[
+                        'rgba(255,99,132, 0.6)',
+                        'rgba(54,162,235, 0.6)',
+                        'rgba(75,192,192, 0.6)'],
+                }]
+
+            },
+            options:{
+                plugins:{
+                    legend:{
+                        position:'top',
+                    },
+                    title: {
+                        display: true,
+                        text: '1구역 분류 현황',
+                        font:{
+                            size:16
+                        }
+                    }
+                },
+                animation: {
+                    animateRotate: true, // 원형 차트 회전 애니메이션을 활성
+                    duration: 2000, // 애니메이션 지속 시간을 설정
+                    easing: 'ease-in-out' // 애니메이션의 변화 속도 설정
+                },
+                
+                scales: {
+                    xAxes: [
+                    {
+                        scaleLabel: {
+                        display: true,
+                        labelString: '클릭시 세부 분류 현황 확인 페이지로 이동',
+                        fontColor: '#C7C7CC',
+                        fontSize: 11
+                        }
+                    }
+                    ]
+                },
+                footer: {
+                    display: true,
+                    text: '클릭시 세부 분류 현황 확인 페이지로 이동'
+                },
+                onClick: function(event, elements) {
+                    if (elements.length > 0) {
+                    var index = elements[0]._index;
+
+                    var form = document.createElement('form');
+                    form.action = 'http://localhost:3000/status_process';
+                    form.method = 'post';
+
+                    var hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'item';
+                    hiddenInput.value = 1;
+                    form.appendChild(hiddenInput);
+
+                    var submitButton = document.createElement('input');
+                    submitButton.type = 'submit';
+                    submitButton.value = '확인';
+                    form.appendChild(submitButton);
+
+                    document.body.appendChild(form);
+
+                    form.submit();
+
+                    document.body.removeChild(form);
+                    }
+                }
+            }
+                 
+        });
+
+        //그래프 2
+        const hoverPieChartCtx2 = document.querySelector('#hoverPieChart2').getContext('2d');
+        const hoverPieChart2 = new Chart(hoverPieChartCtx2, {
+            type: 'pie',
+            data:{
+                labels:['의류', '식품'],
+                datasets:[{
+                data: [clothes,food,0],
+                    backgroundColor: [
+                        'rgba(75,192,192, 0.6)',
+                        'rgba(255,228,0, 0.6)'],
+                    borderColor: [
+                        'rgba(75,192,192, 0.6)',
+                        'rgba(255,228,0, 0.6)'],
+                    borderWidth: 1,
+                    hoverBackgroundColor:[
+                        'rgba(75,192,192, 0.6)',
+                        'rgba(255,228,0, 0.6)'],
+                        
+                }]
+
+            },
+            options:{
+                plugins:{
+                    legend:{
+                        position:'top',
+                    },
+                    title: {
+                        display: true,
+                        text: '2구역 분류 현황',
+                        font:{
+                            size:16
+                        }
+                    }
+                },
+                
+                onClick: function(event, elements) {
+                    if (elements.length > 0) {
+                    var index = elements[0]._index;
+
+                    var form = document.createElement('form');
+                    form.action = 'http://localhost:3000/status_process';
+                    form.method = 'post';
+
+                    var hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'item';
+                    hiddenInput.value = 2;
+                    form.appendChild(hiddenInput);
+
+
+                    var submitButton = document.createElement('input');
+                    submitButton.type = 'submit';
+                    submitButton.value = '확인';
+                    form.appendChild(submitButton);
+
+                    document.body.appendChild(form);
+                    form.submit();
+
+                    document.body.removeChild(form);
+                    }
+                }
+            }
+                 
+        });
+
+    </script>
 </body>
 </html>

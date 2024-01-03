@@ -84,22 +84,16 @@ app.get('/status', (request,response) =>{
     <input type="submit" value="확인">
   </form>
   `)
-  // const html=(`
-  // <ul class="list">
-  //   <li class="list__item">
-  //     <input type="radio" class="radio-btn" name="item" id="a-opt" />
-  //     <label for="a-opt" class="label">1구역</label>
-  //   </li>
-    
-  //   <li class="list__item">
-  //     <input type="radio" class="radio-btn" name="item" id="b-opt" />
-  //     <label for="b-opt" class="label">2구역</label>
-  //   </li>
-  //   <input type="submit" value="확인">
-  // </ul>
-  // `)
-  var log_status=authCheck.isOwner(request)
-  response.render('status',{html,log_status})
+  db.query('SELECT * FROM status', function(error, data){
+    if (error) throw error;
+    const to_page = []
+    data.forEach(function(item){
+      to_page.push(item)
+    })
+    var log_status=authCheck.isOwner(request)
+    response.render('status',{html,log_status,to_page : JSON.stringify(to_page)})
+  })
+  
 })
 
 

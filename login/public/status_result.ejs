@@ -51,18 +51,17 @@
                 <% } %>
             </table>
         </div>
-    <div class="background statusbox animate__animated animate__bounceInLeft">
+    <!-- <div class="background statusbox animate__animated animate__bounceInLeft">
         <% for(var i =0; i < data.length; i++){%>
             <div class="background box animate__animated animate__slideInLeft">
                 <div calss=" box">
-                    <!-- <%- data[i].section %> -->
                     <p><%- data[i].drop_offAt %></p>
                     <p><%- data[i].product_name %></p>
                     <%- data[i].barcode %>
                 </div>
             </div>
         <% } %>
-    </div>
+    </div> -->
     <span hidden class="hidden-value"><%= data.length %></span>
     <script>
         console.log(document.querySelector(".hidden-value").textContent)
