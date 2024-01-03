@@ -15,11 +15,18 @@
 <body>
     <header>
         <nav>
-            <img src="./images/로고_흰색글씨.png" alt="로고">
+            <a href="index.html">
+                <img src="./images/로고_흰색글씨.png" alt="로고">
+            </a>
             <ul>
                 <li><a href="http://localhost:3000/auth/login">로그인</a></li>
                 <li><a href="#management">물류관리</a></li>
+<<<<<<< HEAD
                 <li><a href="http://localhost:3000/status">분류현황</a></li>
+=======
+                <li><a href="#status">분류현황</a></li>
+                <li><a href="cam.html">View</a></li>
+>>>>>>> 497ce987d397b59be47c25041778b1ae155d2dc3
                 <li><a href="http://localhost:3000/auth/question">고객지원</a></li>
             </ul>
         </nav>
@@ -56,7 +63,7 @@
                         정신개조에 의해 개발된 자동 물류 분류 시스템으로,
                     </h2>
                     <h3>
-                        각종 센서를 아두이노로 제어하고 바코드를 OpenCV 영상처리를 통해 분석하여</br>
+                        각종 센서를 아두이노로 제어하고 QR코드를 YOLOv8을 통해 분석하여</br>
                         물류의 분류 및 데이터 관리를 할 수 있는 시스템입니다.
                     </h3>
                 </div>
@@ -73,7 +80,7 @@
                 <div class="project-Intro-2-content">
                     <img id="barcode-belt" src="./images/바코드-벨트.png" alt="바코드-벨트">
                     <h2>YOLO로 학습시킨 모델을 사용하여 물품의 바코드를 감지하고, 해당 물품 정보를 분석합니다.</br>
-                        분석한 데이터를 기반으로 4개의 구역 중 어느 곳으로 물품을 분류할지</br>
+                        분석한 데이터를 기반으로 2개의 구역 중 어느 곳으로 물품을 분류할지</br>
                         자동으로 결정하여 물류를 처리하는 자동화 시스템입니다.
                     </h2>
                 </div>
@@ -90,7 +97,7 @@
             </div>
             <h1 id="team-Intro-title">정신개조</br>Mental Reform</h1>
             <div class="member">
-                <img id="junhyoung" src="./images/최준형소개.png" alt="최준형소개사진">
+                <img id="junhyoung" src="./images/최준형소개.jpg" alt="최준형소개사진">
                 <div class="member-description" id="jun">
                     <h3>최준형</h3>
                     <p>팀원</p>
@@ -110,7 +117,7 @@
                     <p> - 메인 페이지 디자인</p>
                     <p> - 하드웨어 설계 및 제작</p>
                     <p> - 아두이노 스케치를 통한 센서 제어</p>
-                    <p> - 물류물품 CRUD 기능 구현 및 디자인</p>
+                    <p> - QR코드 정보 추가 및 검색, 삭제 기능 구현 및 디자인</p>
                     <p>자신감과 열정으로 기술의 가능성을 끌어올리는 개발자 황지수입니다.</p>
                     <p>Email : jeesu0320@naver.com</p>
                 </div>
@@ -124,7 +131,7 @@
             <a href="https://github.com/JITUCHU/2023AIoT-FINAL-Project">
                 <img id="github-logo" src="./images/github-logo.png" alt="깃허브로고">
             </a>
-            <a href="https://www.notion.so/6855e9fd82ff4220b69e527a998cf981?pvs=4">
+            <a href="https://warp-panther-f8f.notion.site/365bff7c8bdc4cb384ee1796c10b7b68">
                 <img id="notion-jisu" src="./images/notion-logo.png" alt="지수노션">
             </a>
             <a href="https://www.notion.so/6855e9fd82ff4220b69e527a998cf981?pvs=4">
