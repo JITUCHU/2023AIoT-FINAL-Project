@@ -15,17 +15,24 @@
                 <img src="./images/로고_흰색글씨.png" alt="로고">
             </a>
             <ul>
-                <li><a href="#management">물류관리</a></li>
+                <li class="dropdown">
+                    <a href="#">물류관리</a>
+                    <div class="dropdown-content">
+                        <a href="/QRcreate">물품 추가</a>
+                        <a href="/QRresearch">물품 검색</a>
+                        <a href="/QRdelete">물품 삭제</a>
+                    </div>
+                </li>
                 <li><a href="/status">분류현황</a></li>
                 <li><a href="/cam">View</a></li>
                 <li><a href="/auth/question">고객지원</a></li>
                 <% if (log_status){%>
                     <li class="nav-item">
-                        <a class="nav-link" href="/auth/logout">록아웃</a>
+                        <a class="nav-link" href="/auth/logout">로그아웃</a>
                     </li>
                 <% }else{ %>
                     <li class="nav-item">
-                        <a class="nav-link" href="/auth/login">록인</a>
+                        <a class="nav-link" href="/auth/login">로그인</a>
                     </li>   
                 <%}%> 
             </ul>
