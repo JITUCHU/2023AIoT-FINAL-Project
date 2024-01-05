@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>물품 삭제 페이지</title>
+  <title>물품 검색 페이지</title>
   <link href="index.css" rel="stylesheet"/>
   <link href="style.css" rel="stylesheet"/>
 </head>
@@ -40,5 +40,28 @@
   <div class="background animate__animated animate__bounceInLeft">
     <%- html %>
   </div>
+    <table>
+        <thead>
+            <tr>
+                <th>품목</th>
+                <th>제품명</th>
+                <th>분류구역</th>
+                <th>QR코드정보</th>
+            </tr>
+        </thead>
+        <!-- <tbody>
+            <% for(var i =0; i < item.length; i++){%>
+                <tr>
+                    <td><%= item[i].type %></td>
+                    <td><%= item[i].product_name %></td>
+                    <td><%= item[i].location %></td>
+                    <td><%= item[i].barcode %></td>
+                </tr>
+            <% }; %>
+        </tbody> -->
+    </table>
+  <script>
+    // 테이블 콘텐츠를 요청하는 ajax 통신! 
+  </script>
 </body>
 </html>

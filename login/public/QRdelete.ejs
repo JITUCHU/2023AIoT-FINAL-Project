@@ -42,22 +42,5 @@
   <div class="background animate__animated animate__bounceInLeft">
     <%- html %>
   </div>
-  <script>
-    // 품목 선택 시 해당하는 일련번호 가져오기
-    $('#type').change(function() {
-      var selectedType = $(this).val();
-      $.ajax({
-        url: '/getNumbers', // 일련번호를 가져오는 엔드포인트
-        method: 'POST',
-        data: { type: selectedType },
-        success: function(data) {
-          $('#number').empty();
-          data.forEach(function(number) {
-            $('#number').append('<option value="' + number + '">' + number + '</option>');
-          });
-        }
-      });
-    });
-  </script>
 </body>
 </html>

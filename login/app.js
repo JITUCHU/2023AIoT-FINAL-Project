@@ -116,7 +116,7 @@ app.get('/QRcreate', function(request, response) {
   if(!authCheck.isOwner(request,response)){
     response.redirect('/auth/login');
     return false;
-  } 
+  }
   var html =(`
   <div id="contact">
       <h1>QR 코드 생성 및 등록</h1>
@@ -146,7 +146,7 @@ app.get('/QRcreate', function(request, response) {
   response.render('QRcreate',{html,log_status});
 });
 
-app.post('/QRcreate_prosess', (req, res) => {
+app.post('/QRcreate_process', (req, res) => {
   const type = req.body.type;
   const barcode = req.body.number;
   const name = req.body.name;
@@ -199,7 +199,7 @@ app.get('/QRresearch', function(request, response) {
   } 
   var html =(`
   <div id="contact">
-      <h1>QR 코드 검색</h1>
+      <h1>물품 검색</h1>
       <form id="crudForm" action="/QRresearch_prosess" method="post">
           <fieldset>
               <label for="type">품목 :</label>
@@ -213,13 +213,50 @@ app.get('/QRresearch', function(request, response) {
 
           </fieldset>
       </form>
-      <div id="barcodeList"></div>
+      <div id="productList"></div>
   </div>
   `);
   var log_status=authCheck.isOwner(request)
   response.render('QRresearch',{html,log_status});
 });
 
+app.post('/QRresearch_process', (req, res) => {
+  const type = req.body.type;
+
+  db.query('SELECT * FROM product WHERE type = ?', [type], (error, item) => {
+    if (error) throw error;
+
+    console.log(item)
+
+    var html =(`
+      <div id="contact">
+          <h1>물품 검색</h1>
+          <form id="crudForm" action="/QRresearch_prosess" method="post">
+              <fieldset>
+                  <label for="type">품목 :</label>
+                  <select name="type">
+                    <option value="books">books</option>
+                    <option value="clothes">clothes</option>
+                    <option value="digital">digital</option>
+                    <option value="food">food</option>
+                  </select>
+                  <input type="submit" value="검색하기" />
+
+              </fieldset>
+          </form>
+          <div id="productList"></div>
+      </div>
+      `);
+    // 검색 결과를 HTML 문자열로 생성
+    // let resultList = '<div id="contact"><fieldset><table><thread><tr><th>품목</th><th>제품명</th><th>분류구역</th><th>QR코드정보</th></tr></thread><tbody>';
+    // results.forEach(result => {
+    //   resultList += `${result.type} - ${result.product_name} - ${result.location} - ${result.barcode}`;
+    // });
+
+    // 검색 결과를 QRresearch 페이지에 렌더링
+    res.render('QRresearch', { item, html });
+  });
+});
 
 // QR 삭제하기
 app.get('/QRdelete', function(request, response) { 
