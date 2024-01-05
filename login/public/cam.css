@@ -1,0 +1,103 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "JalnanGothic";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "JeonjuCraftGoR";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/JeonjuCraftGoR.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 배경색 지정 */
+body {
+    background: #25303C;
+    background: -moz-linear-gradient(top, #25303C 0%, #728EAA 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #25303C), color-stop(100%, #728EAA));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#monitor-frame {
+    width: 800px; /* 컴퓨터 모니터 프레임의 폭 */
+    height: 500px; /* 컴퓨터 모니터 프레임의 높이 */
+    background-color: #333; /* 컴퓨터 모니터 프레임의 색상 */
+    border-radius: 20px; /* 컴퓨터 모니터 프레임의 모서리 둥글게 */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* 그림자 효과 */
+}
+#video {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px; /* 웹캠 화면 모서리 둥글게 */
+    overflow: hidden;
+}
+#webcam-area {
+    width: 640px; /* 웹캠 영역의 폭 */
+    height: 480px; /* 웹캠 영역의 높이 */
+    background-color: white; /* 웹캠 영역의 배경색 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px; /* 웹캠 영역의 모서리 둥글게 */
+    overflow: hidden;
+}
+
+/* navbar 설정 */
+nav {
+    display: flex;
+    align-items: center;
+    font-family: "JalnanGothic";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+  }
+  nav img {
+    margin-left: 20px;
+    margin-right: auto;
+    width: 40px;
+    height: 40px;
+    max-width: 100px;
+    vertical-align: middle;
+  }
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+  }
+  nav li {
+    margin-right: 23px;
+  }
+  nav a {
+    text-decoration: none;
+    font-size: 16px;
+    color: lightgray;
+  }
+  nav a:hover {
+    text-decoration: underline;
+    color: white;
+    font-size: 17px; /* 커서 올라왔을 때 크기 약간 키우기 */
+    transition: transform 0.1s ease-in-out; /* 변경된 스타일 적용까지 걸리는 시간 */
+  }

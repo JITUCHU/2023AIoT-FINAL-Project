@@ -10,9 +10,13 @@ const authCheck = require('./authCheck.js');
 
 router.use(
     express.static(__dirname + "/public"
+<<<<<<< HEAD
   )
   )
 
+=======
+))
+>>>>>>> e4c01c0347141090cb1fbf8236c1445840436f9f
 // 로그인 화면
 router.get('/login', function (request, response) {
     var html = (`

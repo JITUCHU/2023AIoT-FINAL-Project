@@ -1,2 +1,7 @@
 .env
 node_modules/
+pyscripts/Lib/
+pyscripts/Include/
+pyscripts/Scripts/
+pyscripts/share/
+pyscripts/*.cfg

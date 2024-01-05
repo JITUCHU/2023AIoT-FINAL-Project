@@ -20,7 +20,12 @@ const template = require('./template.js');
 const app = express();
 const port = 3000
 
+<<<<<<< HEAD
 app.set('view engine','ejs');
+=======
+
+app.set('view engine','ejs')
+>>>>>>> e4c01c0347141090cb1fbf8236c1445840436f9f
 app.set('views','./public')
 
 app.use(
@@ -55,6 +60,10 @@ app.get('/', (req, res) => {
   }
 })
 
+app.get('/cam',(request,response) =>{
+    response.render('cam')
+})
+
 // 인증 라우터
 app.use('/auth', authRouter);
 
@@ -74,11 +83,19 @@ app.use('/auth', authRouter);
 // })
 
 // app.get('/main', (request, response) => {
+<<<<<<< HEAD
 //   if (!authCheck.isOwner(request, response)) {  // 로그인 안되어있으면 로그인 페이지로 이동시킴
 //     response.redirect('/auth/login');
 //     return false;
 //   }
 //   var log_status=authCheck.isOwner(request)
+=======
+//   var log_status= 0
+//   if (!authCheck.isOwner(request, response)) {  // 로그인 안되어있으면 로그인 페이지로 이동시킴
+//     response.render('main',{log_status});
+//   }
+//   log_status=authCheck.isOwner(request)
+>>>>>>> e4c01c0347141090cb1fbf8236c1445840436f9f
 //   response.render('main',{log_status});
 // })
 
@@ -86,6 +103,10 @@ app.get('/main',(request,response) =>{
   response.render('main');
 })
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e4c01c0347141090cb1fbf8236c1445840436f9f
 app.get('/status', (request,response) =>{
   if(!authCheck.isOwner(request,response)){
     response.redirect('/auth/login');
@@ -102,22 +123,16 @@ app.get('/status', (request,response) =>{
     <input type="submit" value="확인">
   </form>
   `)
-  // const html=(`
-  // <ul class="list">
-  //   <li class="list__item">
-  //     <input type="radio" class="radio-btn" name="item" id="a-opt" />
-  //     <label for="a-opt" class="label">1구역</label>
-  //   </li>
-    
-  //   <li class="list__item">
-  //     <input type="radio" class="radio-btn" name="item" id="b-opt" />
-  //     <label for="b-opt" class="label">2구역</label>
-  //   </li>
-  //   <input type="submit" value="확인">
-  // </ul>
-  // `)
-  var log_status=authCheck.isOwner(request)
-  response.render('status',{html,log_status})
+  db.query('SELECT * FROM status', function(error, data){
+    if (error) throw error;
+    const to_page = []
+    data.forEach(function(item){
+      to_page.push(item)
+    })
+    var log_status=authCheck.isOwner(request)
+    response.render('status',{html,log_status,to_page : JSON.stringify(to_page)})
+  })
+  
 })
 
 app.post('/status_process',(request,response) =>{

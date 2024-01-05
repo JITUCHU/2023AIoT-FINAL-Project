@@ -3,44 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/index.css">
-    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <title>WelCome</title>
 </head>
 <body>
     <header>
         <nav>
-            <a href="/main">
+            <a href="index.html">
                 <img src="./images/로고_흰색글씨.png" alt="로고">
             </a>
             <ul>
-                <li class="dropdown">
-                    <a href="#">물류관리</a>
-                    <div class="dropdown-content">
-                        <a href="/QRcreate">물품 추가</a>
-                        <a href="/QRresearch">물품 검색</a>
-                        <a href="/QRdelete">물품 삭제</a>
-                    </div>
-                </li>
+                <li><a href="#management">물류관리</a></li>
                 <li><a href="/status">분류현황</a></li>
                 <li><a href="/cam">View</a></li>
                 <li><a href="/auth/question">고객지원</a></li>
                 <% if (log_status){%>
                     <li class="nav-item">
-                        <a class="nav-link" href="/auth/logout">로그아웃</a>
+                        <a class="nav-link" href="/auth/logout">록아웃</a>
                     </li>
                 <% }else{ %>
                     <li class="nav-item">
-                        <a class="nav-link" href="/auth/login">로그인</a>
+                        <a class="nav-link" href="/auth/login">록인</a>
                     </li>   
                 <%}%> 
             </ul>
         </nav>
     </header>
-    
+
     <div class="background animate__animated animate__bounceInLeft">
-        <%- html %>
+        <%= welcome%><a href="/auth/logout">로그아웃</a>
+        <hr>
+        <h2>메인 페이지에 오신 것을 환영합니다</h2>
+        <p>로그인에 성공하셨습니다.</p>
     </div>
 </body>
 </html>
