@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>물품 삭제 페이지</title>
+  <link href="index.css" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+  <!-- jQuery CDN 추가 -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/main">
+        <img src="./images/로고_흰색글씨.png" alt="로고">
+      </a>
+      <ul>
+        <li class="dropdown">
+          <a href="#">물류관리</a>
+          <div class="dropdown-content">
+              <a href="/QRcreate">물품 추가</a>
+              <a href="/QRresearch">물품 검색</a>
+              <a href="/QRdelete">물품 삭제</a>
+          </div>
+        </li>
+        <li><a href="#status">분류현황</a></li>
+        <li><a href="cam.html">View</a></li>
+        <li><a href="http://localhost:3000/auth/question">고객지원</a></li>
+        <li><a href="http://localhost:3000/auth/login">로그인</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="background animate__animated animate__bounceInLeft">
+    <%- html %>
+  </div>
+  <script>
+    // 품목 선택 시 해당하는 일련번호 가져오기
+    $('#type').change(function() {
+      var selectedType = $(this).val();
+      $.ajax({
+        url: '/getNumbers', // 일련번호를 가져오는 엔드포인트
+        method: 'POST',
+        data: { type: selectedType },
+        success: function(data) {
+          $('#number').empty();
+          data.forEach(function(number) {
+            $('#number').append('<option value="' + number + '">' + number + '</option>');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

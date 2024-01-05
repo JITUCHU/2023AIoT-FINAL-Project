@@ -8,6 +8,10 @@ var template = require('./template.js');
 var db = require('./db');
 const authCheck = require('./authCheck.js');
 
+router.use(
+    express.static(__dirname + "/public"
+  )
+  )
 
 // 로그인 화면
 router.get('/login', function (request, response) {
@@ -78,7 +82,6 @@ router.get('/logout', function (request, response) {
 });
 
 
-
 // 관리자에게 문의하기
 router.get('/question', function(request, response) {  
     var html =(`
@@ -112,7 +115,6 @@ router.get('/question', function(request, response) {
     var log_status=authCheck.isOwner(request)
     response.render('question',{html,log_status});
 });
-
 
 router.post('/question_prosess', function(request, response){
     const category =request.body.category
