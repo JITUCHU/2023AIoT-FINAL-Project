@@ -30,8 +30,19 @@ def save2sql(type,key):
     elif type == "clothes" or type == "food":
         section = 2
     else :
+        print("NO")
         return 0
-    return (f"INSERT INTO status VALUES ('{section}','{now}','1','{type} {key}')")
+    
+    barcode = f"{type} {key}"
+    cur.execute(f"SELECT product_name FROM product WHERE barcode = '{barcode}'")
+    result = cur.fetchone()
+
+    if result:
+        product_name = result[0]
+    else:
+        product_name = None
+
+    return (f"INSERT INTO status VALUES ('{section}','{now}','{product_name}','{barcode}')")
         
 def serial_send(type):
     print(type)
@@ -83,7 +94,45 @@ def generate():
                             cv2.imwrite(f"C:/Users/202-24/data/barcode{count}.png", rgb_image)
                             type,key=barcode_info.split(" ")
                             my_serial.write(serial_send(type).encode()) # 아두이노로 전송
-                            cur.execute(save2sql(type,key)) # sql에 넣기 
+                            cur.execute(save2sql(type,key)) # sql에 넣기
+                            conn.commit() 
+                            count += 1
+                            b_barcode_info = barcode_info
+                            
+            # cv2.imshow("YOLO Detection", plots)
+            
+            # # 'esc' 키를 누르면 종료
+            # if cv2.waitKey(1) == 27:
+            #     break
+            _, buffer = cv2.imencode('.jpg', plots) 
+            frame = buffer.tobytes()    
+            yield (b'--frame\r\n'
+                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+            
+def web_generate():
+    count =0
+    b_barcode_info = 0
+    while True:
+        
+        ret, frame = cap.read()
+        if ret:
+            # YOLO를 통해 물체 감지
+            results = model(frame, verbose=False)
+            plots = results[0].plot()
+            boxes = results[0].boxes
+            
+            # BGR을 RGB로 변환
+            rgb_image = cv2.cvtColor(plots, cv2.COLOR_BGR2RGB)
+            if boxes:
+                # 바코드 찾기
+                barcodes = pyzbar.decode(rgb_image)
+                
+                if barcodes:
+                    for barcode in barcodes:
+                        x, y, w, h = barcode.rect
+                        barcode_info = barcode.data.decode()
+                        # print("바코드 정보:", barcode_info)
+                        if barcode_info and (barcode_info!=b_barcode_info):
                             count += 1
                             b_barcode_info = barcode_info
                             
@@ -96,6 +145,11 @@ def generate():
 @app.route('/video_feed')
 def video_feed():
     return Response(generate(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/video_render')
+def video_render():
+    return Response(web_generate(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
     # YOLO 모델 초기화
@@ -113,11 +167,14 @@ if __name__ == "__main__":
                 t1=threading.Thread(target=serial_read_thread) #작업 단위 하나 추가
                 t1.daemon=True  #데몬:메인 스레드가 종료될 때 함께 종료되는 스레드
                 t1.start()
+                
 
     try :
         app.run(host="0.0.0.0", port="8002", debug=False)
     except KeyboardInterrupt :
         my_serial.close()
-        conn.commit()
+        cap.release()
+    finally:
         conn.close()
-        cap.release()              
+
+                      

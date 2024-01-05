@@ -45,7 +45,7 @@
     <br>
     <br>
     <br>
-    <div style="display: flex; max-width: 1000px;" class="statusbox background animate__animated animate__bounceInLeft">
+    <div style="display: flex; max-width: 1000px;" class="statusbox background animate__animated animate__bounceInLeft" title="클릭시 세부 분류현황 페이지로 이동">
         <div style="max-width: 500px;">
             <canvas id="hoverPieChart" width="400px" height="400px"></canvas>
         </div>
@@ -155,19 +155,6 @@
                     animateRotate: true, // 원형 차트 회전 애니메이션을 활성
                     duration: 2000, // 애니메이션 지속 시간을 설정
                     easing: 'ease-in-out' // 애니메이션의 변화 속도 설정
-                },
-                
-                scales: {
-                    xAxes: [
-                    {
-                        scaleLabel: {
-                        display: true,
-                        labelString: '클릭시 세부 분류 현황 확인 페이지로 이동',
-                        fontColor: '#C7C7CC',
-                        fontSize: 11
-                        }
-                    }
-                    ]
                 },
                 footer: {
                     display: true,

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>물품 추가 페이지</title>
+  <link href="index.css" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/main">
+        <img src="./images/로고_흰색글씨.png" alt="로고">
+      </a>
+      <ul>
+        <li class="dropdown">
+          <a href="#">물류관리</a>
+          <div class="dropdown-content">
+              <a href="/QRcreate">물품 추가</a>
+              <a href="/QRresearch">물품 검색</a>
+              <a href="/QRdelete">물품 삭제</a>
+          </div>
+        </li>
+        <li><a href="/status">분류현황</a></li>
+        <li><a href="/cam">View</a></li>
+        <li><a href="http://localhost:3000/auth/question">고객지원</a></li>
+        <li><a href="http://localhost:3000/auth/login">로그인</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="background animate__animated animate__bounceInLeft">
+    <%- html %>
+  </div>
+</body>
+</html>
