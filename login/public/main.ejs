@@ -19,11 +19,7 @@
                 <img src="./images/로고_흰색글씨.png" alt="로고">
             </a>
             <ul>
-                <li><a href="/auth/login">로그인</a></li>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 1219764c018d6b8f9e17595157a76616237a0a4f
+                <li><a href="/status">분류현황</a></li>
                 <li class="dropdown">
                     <a href="#">물류관리</a>
                     <div class="dropdown-content">
@@ -32,14 +28,17 @@
                         <a href="/QRdelete">물품 삭제</a>
                     </div>
                 </li>
-<<<<<<< HEAD
-=======
-=======
-                <li><a href="#management">물류관리</a></li>
->>>>>>> e4c01c0347141090cb1fbf8236c1445840436f9f
->>>>>>> 1219764c018d6b8f9e17595157a76616237a0a4f
-                <li><a href="/status">분류현황</a></li>
+                <li><a href="/cam">View</a></li>
                 <li><a href="/auth/question">고객지원</a></li>
+                <% if (log_status){%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/logout">로그아웃</a>
+                    </li>
+                <% }else{ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/login">로그인</a>
+                    </li>   
+                <%}%> 
             </ul>
         </nav>
     </header>

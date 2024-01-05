@@ -20,12 +20,7 @@ const authCheck = require('./authCheck.js');
 const app = express();
 const port = 3000
 
-<<<<<<< HEAD
 app.set('view engine','ejs');
-=======
-
-app.set('view engine','ejs')
->>>>>>> e4c01c0347141090cb1fbf8236c1445840436f9f
 app.set('views','./public')
 
 app.use(
@@ -55,47 +50,25 @@ app.get('/', (req, res) => {
     res.redirect('/auth/login');
     return false;
   } else {                                      // 로그인 되어있으면 메인 페이지로 이동시킴
-    // res.redirect('/main');
-    // return false;
+    res.redirect('/main');
+    return false;
   }
 })
 
 app.get('/cam',(request,response) =>{
-    response.render('cam')
+  var log_status=authCheck.isOwner(request)
+  response.render('cam',{log_status})
 })
 
 // 인증 라우터
 app.use('/auth', authRouter);
 
 
-<<<<<<< HEAD
-=======
-// app.get('/main', (request, response) => {
-<<<<<<< HEAD
-//   if (!authCheck.isOwner(request, response)) {  // 로그인 안되어있으면 로그인 페이지로 이동시킴
-//     response.redirect('/auth/login');
-//     return false;
-//   }
-//   var log_status=authCheck.isOwner(request)
-=======
-//   var log_status= 0
-//   if (!authCheck.isOwner(request, response)) {  // 로그인 안되어있으면 로그인 페이지로 이동시킴
-//     response.render('main',{log_status});
-//   }
-//   log_status=authCheck.isOwner(request)
->>>>>>> e4c01c0347141090cb1fbf8236c1445840436f9f
-//   response.render('main',{log_status});
-// })
->>>>>>> 1219764c018d6b8f9e17595157a76616237a0a4f
 
 app.get('/main',(request,response) =>{
-  response.render('main');
+  var log_status=authCheck.isOwner(request)
+  response.render('main',{log_status});
 })
-
-<<<<<<< HEAD
-=======
-
->>>>>>> e4c01c0347141090cb1fbf8236c1445840436f9f
 app.get('/status', (request,response) =>{
   if(!authCheck.isOwner(request,response)){
     response.redirect('/auth/login');
@@ -138,12 +111,12 @@ app.post('/status_process',(request,response) =>{
   })
 })
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1219764c018d6b8f9e17595157a76616237a0a4f
 // QR 생성하기
-app.get('/QRcreate', function(request, response) {  
+app.get('/QRcreate', function(request, response) { 
+  if(!authCheck.isOwner(request,response)){
+    response.redirect('/auth/login');
+    return false;
+  } 
   var html =(`
   <div id="contact">
       <h1>QR 코드 생성 및 등록</h1>
@@ -173,7 +146,6 @@ app.get('/QRcreate', function(request, response) {
   response.render('QRcreate',{html,log_status});
 });
 
-<<<<<<< HEAD
 app.post('/QRcreate_prosess', (req, res) => {
   const type = req.body.type;
   const barcode = req.body.number;
@@ -190,22 +162,11 @@ app.post('/QRcreate_prosess', (req, res) => {
   // console.log(barcode);
   // console.log(name);
   // console.log(location)
-=======
-app.post('/QRcreate_progress', (req, res) => {
-  const type = req.body.type;
-  const barcode = req.body.serialNumber;
-  const name = req.body.name;
-  const barcodeInfo = `${type} ${serialNumber}`;
-  console.log(type);
-  console.log(barcode);
-  console.log(name);
->>>>>>> 1219764c018d6b8f9e17595157a76616237a0a4f
 
   db.query('SELECT * FROM barcodes WHERE barcode = ?', [barcodeInfo], (error, results) => {
     if (error) throw error;
     
     if (results.length > 0) {
-<<<<<<< HEAD
       res.send(`<script type="text/javascript">alert("이미 존재하는 바코드 입니다."); 
       document.location.href="/QRcreate";</script>`);
     } else {
@@ -226,29 +187,16 @@ app.post('/QRcreate_progress', (req, res) => {
           document.location.href="/QRcreate";</script>`);
         });
       })
-=======
-      res.render('QRcreate', { message: '이미 존재하는 QR코드 정보입니다.' });
-    } else {
-      qr.toDataURL(barcodeInfo, (qrErr, url) => {
-        if (qrErr) throw qrErr;
-        
-        db.query('INSERT INTO barcodes (barcode) VALUES (?)', [barcodeInfo], (insertError) => {
-          if (insertError) throw insertError;
-          
-          db.query('INSERT INTO product (barcode, name) VALUES (?, ?)', [barcodeInfo, productName], (productError) => {
-            if (productError) throw productError;
-            
-            res.render('QRcreate_progress', { qrImage: url });
-          });
-        });
-      });
->>>>>>> 1219764c018d6b8f9e17595157a76616237a0a4f
     }
   });
 });
 
 // QR 검색하기
-app.get('/QRresearch', function(request, response) {  
+app.get('/QRresearch', function(request, response) { 
+  if(!authCheck.isOwner(request,response)){
+    response.redirect('/auth/login');
+    return false;
+  } 
   var html =(`
   <div id="contact">
       <h1>QR 코드 검색</h1>
@@ -274,7 +222,11 @@ app.get('/QRresearch', function(request, response) {
 
 
 // QR 삭제하기
-app.get('/QRdelete', function(request, response) {  
+app.get('/QRdelete', function(request, response) { 
+  if(!authCheck.isOwner(request,response)){
+    response.redirect('/auth/login');
+    return false;
+  } 
   var html =(`
   <div id="contact">
       <h1>QR 코드 삭제</h1>
@@ -302,10 +254,6 @@ app.get('/QRdelete', function(request, response) {
   response.render('QRdelete',{html,log_status});
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1219764c018d6b8f9e17595157a76616237a0a4f
 app.all("/*", (request,response) => {
   response.status(404).json({
       "status" : 404,
