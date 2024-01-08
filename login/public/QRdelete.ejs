@@ -40,7 +40,61 @@
   </header>
 
   <div class="background animate__animated animate__bounceInLeft">
-    <%- html %>
+    <div id="contact">
+        <h1>QR 코드 삭제</h1>
+        <form id="crudForm" action="/QRdelete_prosess" method="post">
+            <fieldset>
+                <label for="type">품목 :</label>
+                <select name="type">
+                  <option value="books" >books</option>
+                  <option value="clothes">clothes</option>
+                  <option value="digital" selected>digital</option>
+                  <option value="food">food</option>
+                </select>
+                <label for="barcodeKey">일련번호 :</label>
+                <select name="number" id="number">
+                </select>
+                <input type="submit" value="삭제하기" />
+  
+            </fieldset>
+        </form>
+  
+    <div id="qrCode"></div>
+    </div>
   </div>
+  <script>
+    function getItemNumber(){
+        $.ajax({
+            url: `http://localhost:3000/item_number?item=${$("select")[0].value}`,
+            type: "json",
+            method:"get",
+            success: function(data){
+                updateNumberSelect(data)
+            }
+        })
+    }
+    function updateNumberSelect(data) {
+        const numberSelect = document.getElementById("number");
+        // 기존 옵션 제거
+        numberSelect.innerHTML = "";
+
+        // 새로운 옵션 추가
+        for (const option of data) {
+            const optionElement = document.createElement("option");
+            optionElement.value = option.barcode; // option.barcode로 수정
+            optionElement.text = option.barcode; // option.barcode로 수정
+            numberSelect.add(optionElement);
+        }
+    }
+    $(document).ready(function () {
+        getItemNumber(); // 페이지 로드 시 실행
+
+        // select 요소의 값이 변경될 때마다 getItemNumber 함수 실행
+        $("select").change(function () {
+            getItemNumber();
+        });
+    });
+    
+  </script>
 </body>
 </html>

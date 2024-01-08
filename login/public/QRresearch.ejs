@@ -5,6 +5,46 @@
   <title>물품 검색 페이지</title>
   <link href="index.css" rel="stylesheet"/>
   <link href="style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/status.css">
+  <style>
+    body {
+        font-family: 'JalnanGothic';
+        position: relative;
+        z-index: 1;
+    }
+
+    body:before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: #728eaa;
+        background: -moz-linear-gradient(top, #25303C 0%, #728EAA 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#25303C), color-stop(100%,#728EAA));
+    }
+    body{
+        display: grid;
+        /* flex-wrap: wrap; */
+    }
+    .statusbox{
+        min-width: 800px;
+    }
+    th{
+        max-height: 47px;
+    }
+    #contact{
+        max-width: 100%;
+    }
+    fieldset{
+        max-width: 100%;
+    }
+    #crudForm{
+        max-width: 100%;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -38,30 +78,49 @@
   </header>
 
   <div class="background animate__animated animate__bounceInLeft">
-    <%- html %>
-  </div>
-    <table>
-        <thead>
+        <div id="contact">
+            <h1>물품 검색</h1>
+            <form id="crudForm" action="/QRresearch_process" method="post">
+                <fieldset>
+                    <label for="type">품목 :</label>
+                    <select name="type">
+                    <option value="books">books</option>
+                    <option value="clothes">clothes</option>
+                    <option value="digital">digital</option>
+                    <option value="food">food</option>
+                    </select>
+                    <input type="submit" value="검색하기" />
+    
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="statusbox animate__animated animate__bounceInLeft">
+        <table>
+            <thead>
             <tr>
-                <th>품목</th>
-                <th>제품명</th>
-                <th>분류구역</th>
-                <th>QR코드정보</th>
+                <th>No.</th>
+                <th>물품명</th>
+                <th>분류 구역</th>
+                <th>QR코드</th>
+        
             </tr>
-        </thead>
-        <!-- <tbody>
-            <% for(var i =0; i < item.length; i++){%>
-                <tr>
-                    <td><%= item[i].type %></td>
-                    <td><%= item[i].product_name %></td>
-                    <td><%= item[i].location %></td>
-                    <td><%= item[i].barcode %></td>
-                </tr>
-            <% }; %>
-        </tbody> -->
-    </table>
+            </thead>
+            <% for(var i =0; i < results.length; i++){%>
+            <tbody>
+            <tr>
+                <td><%= i +1 %></td>
+                <td><%- results[i].product_name %></td>
+                <td><%- results[i].location %></td>
+                <td><%- results[i].barcode %></td>
+            </tr>
+            </tbody>
+            <% } %>
+        </table>
+    </div>
+
   <script>
-    // 테이블 콘텐츠를 요청하는 ajax 통신! 
+     
   </script>
 </body>
 </html>

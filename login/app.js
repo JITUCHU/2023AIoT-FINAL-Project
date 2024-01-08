@@ -146,7 +146,7 @@ app.get('/QRcreate', function(request, response) {
   response.render('QRcreate',{html,log_status});
 });
 
-app.post('/QRcreate_process', (req, res) => {
+app.post('/QRcreate_prosess', (req, res) => {
   const type = req.body.type;
   const barcode = req.body.number;
   const name = req.body.name;
@@ -200,7 +200,7 @@ app.get('/QRresearch', function(request, response) {
   var html =(`
   <div id="contact">
       <h1>물품 검색</h1>
-      <form id="crudForm" action="/QRresearch_prosess" method="post">
+      <form id="crudForm" action="/QRresearch_precess" method="post">
           <fieldset>
               <label for="type">품목 :</label>
               <select name="type">
@@ -216,22 +216,22 @@ app.get('/QRresearch', function(request, response) {
       <div id="productList"></div>
   </div>
   `);
+  var results = 0
   var log_status=authCheck.isOwner(request)
-  response.render('QRresearch',{html,log_status});
+  response.render('QRresearch',{html,log_status,results});
 });
 
 app.post('/QRresearch_process', (req, res) => {
   const type = req.body.type;
 
-  db.query('SELECT * FROM product WHERE type = ?', [type], (error, item) => {
+  db.query('SELECT * FROM product WHERE type = ?', [type], (error, results) => {
     if (error) throw error;
 
-    console.log(item)
 
     var html =(`
       <div id="contact">
           <h1>물품 검색</h1>
-          <form id="crudForm" action="/QRresearch_prosess" method="post">
+          <form id="crudForm" action="/QRresearch_precess" method="post">
               <fieldset>
                   <label for="type">품목 :</label>
                   <select name="type">
@@ -252,44 +252,57 @@ app.post('/QRresearch_process', (req, res) => {
     // results.forEach(result => {
     //   resultList += `${result.type} - ${result.product_name} - ${result.location} - ${result.barcode}`;
     // });
-
+    var log_status=authCheck.isOwner(req)
     // 검색 결과를 QRresearch 페이지에 렌더링
-    res.render('QRresearch', { item, html });
+    res.render('QRresearch', { results, html,log_status });
   });
 });
 
 // QR 삭제하기
+// app.get('/QRdelete', function(request, response) { 
+//   if(!authCheck.isOwner(request,response)){
+//     response.redirect('/auth/login');
+//     return false;
+//   }
+//   var log_status=authCheck.isOwner(request)
+//   response.render('QRdelete',{log_status});
+// });
+
 app.get('/QRdelete', function(request, response) { 
+
   if(!authCheck.isOwner(request,response)){
     response.redirect('/auth/login');
     return false;
-  } 
-  var html =(`
-  <div id="contact">
-      <h1>QR 코드 삭제</h1>
-      <form id="crudForm" action="/QRdelete_prosess" method="post">
-          <fieldset>
-              <label for="type">품목 :</label>
-              <select name="type">
-                <option value="books">books</option>
-                <option value="clothes">clothes</option>
-                <option value="digital">digital</option>
-                <option value="food">food</option>
-              </select>
-              <label for="barcodeKey">일련번호 :</label>
-              <select name="number" id="number">
-              </select>
-              <input type="submit" value="삭제하기" />
+  }
 
-          </fieldset>
-      </form>
-
-  <div id="qrCode"></div>
-  </div>
-  `);
   var log_status=authCheck.isOwner(request)
-  response.render('QRdelete',{html,log_status});
+  response.render('QRdelete',{log_status});
 });
+
+app.get("/item_number", function(request, response){
+  db.query('SELECT * FROM barcodes WHERE type = ?', [request.query.item], (error, results) => {
+    if (error) throw error;
+
+    response.json(results)
+  })
+})
+
+
+app.post('/QRdelete_prosess', (req, res) => {
+
+  const barcode = req.body.number;
+
+  db.query('DELETE  FROM barcodes WHERE barcode = ?', [barcode], (error, results) => {
+    if (error) throw error;
+    
+    if (results) {
+      db.query('DELETE  FROM product WHERE barcode = ?', [barcode], (productError) => {
+        if (productError) throw productError;})
+      res.send(`<script type="text/javascript">alert("삭제 완료!"); 
+      document.location.href="/QRdelete";</script>`);
+    }
+    })
+  })
 
 app.all("/*", (request,response) => {
   response.status(404).json({
