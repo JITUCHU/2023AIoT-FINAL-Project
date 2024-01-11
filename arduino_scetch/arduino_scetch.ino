@@ -17,13 +17,13 @@ void ASMotorAct(char ch) {
     case '1':
       delay(4000);
       driver.setChannelPWM(AS_MOTOR_1, pwmServo.pwmForAngle(70));
-      delay(5000);
+      delay(6000);
       driver.setChannelPWM(AS_MOTOR_1, pwmServo.pwmForAngle(0));
       break;
     case '2':
       delay(9000);
       driver.setChannelPWM(AS_MOTOR_2, pwmServo.pwmForAngle(-70));
-      delay(5000);
+      delay(6000);
       driver.setChannelPWM(AS_MOTOR_2, pwmServo.pwmForAngle(0));
       break;
     case 'E':
